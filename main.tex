@@ -1,0 +1,83 @@
+\documentclass{article}
+\usepackage[german]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{tabularx}
+\usepackage{listings}
+\usepackage{natbib}
+\usepackage{graphicx}
+
+\title{Praktikumsarbeit DSSN WS 2014: \\ Statistik der Xodx-Simulation}
+\author{Franz Teichmann}
+\date{\today}
+
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+\newpage
+
+\section{Einleitung}
+hi there
+
+\section{Aufgabenstellung und Ziel der Messung}
+
+Ziel: - Funktionalität, (Effizienz)
+\begin{enumerate}
+    \item{Überprüfung der Dateneffizienz des Xodx-Netzwerkes - Triple-Explosion}
+    \item{Überprüfung auf verlorene Nachrichten}
+    \item{Zugriffsgeschwindigkeit auf eigene Zeitleiste}
+\end{enumerate}
+
+
+\section{Datacube-Vokabular}
+
+\subsection{Modellierung der Messungen in RDF}
+
+W3C Beispiel
+
+\begin{table}[h]
+\begin{tabular}{|l|l|l|l|}
+\hline
+male           & 2004-2006 & 2005-2007 & 2006-2008 \\ \hline
+Newport        & 76.7      & 77.1      & 77.0      \\ \hline
+Cardiff        & 78.7      & 78.6      & 78.7      \\ \hline
+Monmouthshire  & 76.6      & 76.5      & 76.6      \\ \hline
+Merthyr Tydfil & 75.5      & 75.5      & 74.9      \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\begin{tabular}{|l|l|l|l|}
+\hline
+female         & 2004-2006 & 2005-2007 & 2006-2008 \\ \hline
+Newport        & 80.7      & 80.9      & 81.5      \\ \hline
+Cardiff        & 83.3      & 83.7      & 83.4      \\ \hline
+Monmouthshire  & 81.3      & 81.5      & 81.7      \\ \hline
+Merthyr Tydfil & 79.1      & 79.4      & 79.6      \\ \hline
+\end{tabular}
+\end{table}
+
+unser Beispiel
+
+\begin{table}[h]
+\begin{tabular}{|l|l|l|l|l}
+\cline{1-4}
+node           & 1  & 2 & 3   &  \\ \cline{1-4}
+size (kByte)   & 10 & 8 & 15  &  \\ \cline{1-4}
+follower(number)       & 3  & 8 & 100 &  \\ \cline{1-4}
+activity(tweet/day) & 4  & 3 & 15  &  \\ \cline{1-4}
+\end{tabular}
+\end{table}
+
+\subsection{Implementierung der Messfunktionen}
+
+\section{Darstellung und Auswertung des Datacubes}
+
+\section{Zusammenfassung}
+``I always thought something was fundamentally wrong with the universe'' \citep{adams1995hitchhiker}
+
+\bibliographystyle{plain}
+\bibliography{references}
+\end{document}
