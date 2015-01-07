@@ -1,6 +1,15 @@
 #---this is a turtle file describing the RDF DataCube used in the
 #---evaluation of the DSSN practical winter 2014
 #---for reference, look http://www.w3.org/TR/vocab-data-cube/
+#---structure:
+#------DataSets:
+#--------messages[number]: in+out
+#--------triplestore size[number/kbyte]: triples+total
+#--------access time[microseconds]: measured value
+#------Dimensions:
+#--------agent id+ simulation runtime
+#----all sliced by agent: every slice has a DataSet id
+#----a single observation has to have an id, slice id, time id and value
 
 #---general prefixes
 @prefix rdf:      <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
