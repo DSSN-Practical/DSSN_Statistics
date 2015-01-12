@@ -16,6 +16,13 @@
 @prefix rdfs:     <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix owl:      <http://www.w3.org/2002/07/owl#> .
 @prefix xsd:      <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos:     <http://www.w3.org/2004/02/skos/core#> .
+@prefix void:     <http://rdfs.org/ns/void#> .
+@prefix dct:      <http://purl.org/dc/terms/> .
+@prefix foaf:     <http://xmlns.com/foaf/0.1/> .
+@prefix org:      <http://www.w3.org/ns/org#> .
+@prefix admingeo: <http://data.ordnancesurvey.co.uk/ontology/admingeo/> .
+@prefix interval: <http://reference.data.gov.uk/def/intervals/> .
 
 #---datacube prefix
 @prefix qb:       <http://purl.org/linked-data/cube#> .
@@ -29,4 +36,26 @@
 @prefix sdmx-code:       <http://purl.org/linked-data/sdmx/2009/code#> .
 @prefix sdmx-subject:    <http://purl.org/linked-data/sdmx/2009/subject#> .
 
-#---DataSet
+#---our dssn prefix
+@prefix xo:	       <http://dssn.xodx.org/#>.
+
+#---DataSets
+xo:dataset-xo1 a qb:DataSet;
+#--xo1 dataset for sent messages
+    dct:title       "messages sent"@en;
+    rdfs:label      "messages sent"@en;
+    rdfs:comment    "Number of outgoing messages of one dssn node"@en;
+    dct:description "Number of outgoing messages of one dssn node"@en;
+    dct:publisher   xo:team ;
+    dct:issued      "2014-02-01"^^xsd:date;
+#    dct:subject
+#        sdmx-subject:3.2 ,      # regional and small area statistics
+#        sdmx-subject:1.4 ,      # Health
+#        ex-geo:wales;           # Wales
+    qb:structure eg:ds-xo1 ;  
+    sdmx-attribute:unitMeasure <http://dbpedia.org/resource/Year> ;
+    qb:slice eg:slice1, eg:slice2, eg:slice3, eg:slice4, eg:slice5, eg:slice6 ;
+    .
+
+eg:organization a org:Organization, foaf:Agent;
+    rdfs:label "Example org"@en . 
