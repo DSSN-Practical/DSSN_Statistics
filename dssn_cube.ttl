@@ -21,7 +21,6 @@
 @prefix dct:      <http://purl.org/dc/terms/> .
 @prefix foaf:     <http://xmlns.com/foaf/0.1/> .
 @prefix org:      <http://www.w3.org/ns/org#> .
-@prefix admingeo: <http://data.ordnancesurvey.co.uk/ontology/admingeo/> .
 @prefix interval: <http://reference.data.gov.uk/def/intervals/> .
 
 #---datacube prefix
@@ -39,7 +38,8 @@
 #---our dssn prefix
 @prefix xo:	       <http://dssn.xodx.org/#>.
 
-#---DataSets
+# -- Data Sets --------------------------------------------
+
 xo:dataset-xo1 a qb:DataSet;
 #--xo1 dataset for sent messages
     dct:title       "messages sent"@en;
@@ -48,14 +48,61 @@ xo:dataset-xo1 a qb:DataSet;
     dct:description "Number of outgoing messages of one dssn node"@en;
     dct:publisher   xo:team ;
     dct:issued      "2014-02-01"^^xsd:date;
-#    dct:subject
-#        sdmx-subject:3.2 ,      # regional and small area statistics
-#        sdmx-subject:1.4 ,      # Health
-#        ex-geo:wales;           # Wales
-    qb:structure eg:ds-xo1 ;  
-    sdmx-attribute:unitMeasure <http://dbpedia.org/resource/Year> ;
-    qb:slice eg:slice1, eg:slice2, eg:slice3, eg:slice4, eg:slice5, eg:slice6 ;
+    qb:structure xo:ds-xo1 ;  
+    sdmx-attribute:unitMeasure xsd:integer ;
+#MARKER
+    qb:slice xo:slice1, xo:slice2, xo:slice3, xo:slice4, xo:slice5, xo:slice6 ;
     .
 
-eg:organization a org:Organization, foaf:Agent;
-    rdfs:label "Example org"@en . 
+#our team
+xo:team a org:Organization;
+    rdfs:label "DSSN Team WS 2014"@en .   
+#TO DO
+
+# -- Data structure definition ----------------------------
+
+xo:ds-xo1 a qb:DataStructureDefinition;
+    qb:component 
+    # The dimensions
+        [ qb:dimension xo:refAgent;        qb:order 1 ],
+        [ qb:dimension xo:refPeriod;       qb:order 2; qb:componentAttachment qb:Slice ];
+        
+    # The measure(s)
+    qb:component [ qb:measure xo:outgoingMessages];
+    
+    # The attributes
+    qb:component [ qb:attribute sdmx-attribute:unitMeasure; 
+                   qb:componentRequired "true"^^xsd:boolean;
+                   qb:componentAttachment qb:DataSet; ] ;
+    
+    # slices
+    qb:sliceKey xo:sliceByAgent ;
+    .
+    
+xo:sliceByAgent a qb:SliceKey;
+    rdfs:label "slice by Xodx Agent"@en;
+    rdfs:comment "Slice by grouping all data concerning one Agent together, scaling time"@en;
+    qb:componentProperty xo:refAgent;
+    .
+
+# -- Dimensions and measures  ----------------------------
+
+xo:refAgent  a rdf:Property, qb:DimensionProperty;
+    rdfs:label "Xodx Agent"@en;
+    qb:concept sdmx-concept:refAgent ;
+    .
+
+
+xo:refTime  a rdf:Property, qb:DimensionProperty;
+    rdfs:label "reference Time"@en;
+    rdfs:range #WELCHE RANGE?
+    qb:concept sdmx-concept:refTime ;
+    .
+
+xo:outgoingMessages  a rdf:Property, qb:MeasureProperty;
+    rdfs:label "number of outgoing messages"@en;
+    rdfs:subPropertyOf sdmx-measure:obsValue;
+    rdfs:range xsd:integer ;
+    .
+    
+# -- Observations -----------------------------------------
