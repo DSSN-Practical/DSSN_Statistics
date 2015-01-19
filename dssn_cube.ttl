@@ -7,7 +7,7 @@
 #--------triplestore size[number/kbyte]: triples+total
 #--------access time[microseconds]: measured value
 #------Dimensions:
-#--------agent id+ simulation runtime
+#--------agent id, simulation runtime
 #----all sliced by agent: every slice has a DataSet id
 #----a single observation has to have an id, slice id, time id and value
 
@@ -36,54 +36,59 @@
 @prefix sdmx-subject:    <http://purl.org/linked-data/sdmx/2009/subject#> .
 
 #---our dssn prefix
-@prefix xo:	       <http://dssn.xodx.org/#>.
+@prefix xo:	       <http://xodx.dssn.org/>.
 
 # -- Data Sets --------------------------------------------
 
 xo:dataset-xo1 a qb:DataSet;
 #--xo1 dataset for sent messages
     dct:title       "messages sent"@en;
-    rdfs:label      "messages sent"@en;
     rdfs:comment    "Number of outgoing messages of one dssn node"@en;
-    dct:description "Number of outgoing messages of one dssn node"@en;
-    dct:publisher   xo:team ;
+    dct:publisher   xo:team-dssnpWiSe2014 ;
     dct:issued      "2014-02-01"^^xsd:date;
-    qb:structure xo:ds-xo1 ;  
-    sdmx-attribute:unitMeasure xsd:integer ;
-#MARKER
-    qb:slice xo:slice1, xo:slice2, xo:slice3, xo:slice4, xo:slice5, xo:slice6 ;
+    qb:structure xo:ds-xo1 ;
+    sdmx-attribute:unitMeasure xsd:integer
     .
 
 #our team
-xo:team a org:Organization;
-    rdfs:label "DSSN Team WS 2014"@en .   
+xo:team-dssnpWiSe2014 a org:Organization;
+    rdfs:label "DSSN Team WiSe 2014/2015"@en .
 #TO DO
 
 # -- Data structure definition ----------------------------
 
+# pro messgröße eine DataStructureDefinition
 xo:ds-xo1 a qb:DataStructureDefinition;
-    qb:component 
+    qb:component
     # The dimensions
         [ qb:dimension xo:refAgent;        qb:order 1 ],
         [ qb:dimension xo:refPeriod;       qb:order 2; qb:componentAttachment qb:Slice ];
-        
+
     # The measure(s)
     qb:component [ qb:measure xo:outgoingMessages];
-    
+
     # The attributes
-    qb:component [ qb:attribute sdmx-attribute:unitMeasure; 
+    qb:component [ qb:attribute sdmx-attribute:unitMeasure;
                    qb:componentRequired "true"^^xsd:boolean;
-                   qb:componentAttachment qb:DataSet; ] ;
-    
-    # slices
-    qb:sliceKey xo:sliceByAgent ;
+                   qb:componentAttachment qb:DataSet; ]
     .
-    
-xo:sliceByAgent a qb:SliceKey;
-    rdfs:label "slice by Xodx Agent"@en;
-    rdfs:comment "Slice by grouping all data concerning one Agent together, scaling time"@en;
-    qb:componentProperty xo:refAgent;
+
+xo:ds-xo2 a qb:DataStructureDefinition;
+    qb:component
+    # The dimensions
+        [ qb:dimension xo:refAgent;        qb:order 1 ],
+        [ qb:dimension xo:refPeriod;       qb:order 2; qb:componentAttachment qb:Slice ];
+
+    # The measure(s)
+    qb:component [ qb:measure xo:outgoingMessages];
+
+    # The attributes
+    qb:component [ qb:attribute sdmx-attribute:unitMeasure;
+                   qb:componentRequired "true"^^xsd:boolean;
+                   qb:componentAttachment qb:DataSet; ]
+
     .
+
 
 # -- Dimensions and measures  ----------------------------
 
@@ -103,6 +108,8 @@ xo:outgoingMessages  a rdf:Property, qb:MeasureProperty;
     rdfs:label "number of outgoing messages"@en;
     rdfs:subPropertyOf sdmx-measure:obsValue;
     rdfs:range xsd:integer ;
+
+#follower als weitere measure property einfügen
     .
-    
+
 # -- Observations -----------------------------------------
