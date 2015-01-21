@@ -3,6 +3,7 @@
 #---for reference, look http://www.w3.org/TR/vocab-data-cube/
 #---structure:
 #------DataSets:
+#--------followers[number]
 #--------messages[number]: in+out
 #--------triplestore size[number/kbyte]: triples+total
 #--------access time[microseconds]: measured value
@@ -10,6 +11,7 @@
 #--------agent id, simulation runtime
 #----all sliced by agent: every slice has a DataSet id
 #----a single observation has to have an id, slice id, time id and value
+# TODO ranges hinzufügen
 
 #---general prefixes
 @prefix rdf:      <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -39,16 +41,65 @@
 @prefix xo:	       <http://xodx.dssn.org/>.
 
 # -- Data Sets --------------------------------------------
+xo:dataset-xoFollower a qb:DataSet;
+#--xo dataset for follower
+    dct:title       "Follower"@en;
+    rdfs:comment    "Number of followers of one dssn node"@en;
+    dct:publisher   xo:team-dssnpWiSe2014 ;
+    dct:issued      "2014-02-01"^^xsd:date;
+    qb:structure xo:dsd-xoFollower ;
+    sdmx-attribute:unitMeasure xsd:integer
+    .
 
-xo:dataset-xo1 a qb:DataSet;
-#--xo1 dataset for sent messages
+xo:dataset-xoOUT a qb:DataSet;
+#--xo dataset for sent messages
     dct:title       "messages sent"@en;
     rdfs:comment    "Number of outgoing messages of one dssn node"@en;
     dct:publisher   xo:team-dssnpWiSe2014 ;
     dct:issued      "2014-02-01"^^xsd:date;
-    qb:structure xo:ds-xo1 ;
+    qb:structure xo:dsd-xoOUT ;
     sdmx-attribute:unitMeasure xsd:integer
     .
+
+xo:dataset-xoIN a qb:DataSet;
+#--xo dataset for received messages
+    dct:title       "messages received"@en;
+    rdfs:comment    "Number of incoming messages of one dssn node"@en;
+    dct:publisher   xo:team-dssnpWiSe2014 ;
+    dct:issued      "2014-02-01"^^xsd:date;
+    qb:structure xo:dsd-xoIN ;
+    sdmx-attribute:unitMeasure xsd:integer
+    .
+xo:dataset-xoTriples a qb:DataSet;
+#--xo dataset for number of triples
+    dct:title       "Triples"@en;
+    rdfs:comment    "Number of Triples of one dssn node"@en;
+    dct:publisher   xo:team-dssnpWiSe2014 ;
+    dct:issued      "2014-02-01"^^xsd:date;
+    qb:structure xo:dsd-xoTriples ;
+    sdmx-attribute:unitMeasure xsd:integer
+    .
+
+xo:dataset-xoSize a qb:DataSet;
+#--xo dataset for virtuoso size
+    dct:title       "Size"@en;
+    rdfs:comment    "size of the virtuoso store of one dssn node"@en;
+    dct:publisher   xo:team-dssnpWiSe2014 ;
+    dct:issued      "2014-02-01"^^xsd:date;
+    qb:structure xo:dsd-xoSize ;
+    sdmx-attribute:unitMeasure xsd:kilobyte
+    .
+#TODO: KILOBYTE SUCHEN
+xo:dataset-xoAccess a qb:DataSet;
+#--xo dataset for virtuoso size
+    dct:title       "Access time"@en;
+    rdfs:comment    "Time needed for one agent to view his current timeline"@en;
+    dct:publisher   xo:team-dssnpWiSe2014 ;
+    dct:issued      "2014-02-01"^^xsd:date;
+    qb:structure xo:dsd-xoAccess ;
+    sdmx-attribute:unitMeasure xsd:microseconds
+    .
+#TODO MICROSECONDS SUCHEN
 
 #our team
 xo:team-dssnpWiSe2014 a org:Organization;
@@ -58,7 +109,22 @@ xo:team-dssnpWiSe2014 a org:Organization;
 # -- Data structure definition ----------------------------
 
 # pro messgröße eine DataStructureDefinition
-xo:ds-xo1 a qb:DataStructureDefinition;
+xo:dsd-xoFollower a qb:DataStructureDefinition;
+    qb:component
+    # The dimensions
+        [ qb:dimension xo:refAgent;        qb:order 1 ],
+        [ qb:dimension xo:refPeriod;       qb:order 2; qb:componentAttachment qb:Slice ];
+
+    # The measure(s)
+    qb:component [ qb:measure xo:follower];
+
+    # The attributes
+    qb:component [ qb:attribute sdmx-attribute:unitMeasure;
+                   qb:componentRequired "true"^^xsd:boolean;
+                   qb:componentAttachment qb:DataSet; ]
+    .
+
+xo:dsd-xoOUT a qb:DataStructureDefinition;
     qb:component
     # The dimensions
         [ qb:dimension xo:refAgent;        qb:order 1 ],
@@ -73,20 +139,64 @@ xo:ds-xo1 a qb:DataStructureDefinition;
                    qb:componentAttachment qb:DataSet; ]
     .
 
-xo:ds-xo2 a qb:DataStructureDefinition;
+xo:dsd-xoIN a qb:DataStructureDefinition;
     qb:component
     # The dimensions
         [ qb:dimension xo:refAgent;        qb:order 1 ],
         [ qb:dimension xo:refPeriod;       qb:order 2; qb:componentAttachment qb:Slice ];
 
     # The measure(s)
-    qb:component [ qb:measure xo:outgoingMessages];
+    qb:component [ qb:measure xo:receivedMessages];
 
     # The attributes
     qb:component [ qb:attribute sdmx-attribute:unitMeasure;
                    qb:componentRequired "true"^^xsd:boolean;
                    qb:componentAttachment qb:DataSet; ]
+    .
 
+xo:dsd-xoTriples a qb:DataStructureDefinition;
+    qb:component
+    # The dimensions
+        [ qb:dimension xo:refAgent;        qb:order 1 ],
+        [ qb:dimension xo:refPeriod;       qb:order 2; qb:componentAttachment qb:Slice ];
+
+    # The measure(s)
+    qb:component [ qb:measure xo:triples];
+
+    # The attributes
+    qb:component [ qb:attribute sdmx-attribute:unitMeasure;
+                   qb:componentRequired "true"^^xsd:boolean;
+                   qb:componentAttachment qb:DataSet; ]
+    .
+
+xo:dsd-xoSize a qb:DataStructureDefinition;
+    qb:component
+    # The dimensions
+        [ qb:dimension xo:refAgent;        qb:order 1 ],
+        [ qb:dimension xo:refPeriod;       qb:order 2; qb:componentAttachment qb:Slice ];
+
+    # The measure(s)
+    qb:component [ qb:measure xo:size];
+
+    # The attributes
+    qb:component [ qb:attribute sdmx-attribute:unitMeasure;
+                   qb:componentRequired "true"^^xsd:boolean;
+                   qb:componentAttachment qb:DataSet; ]
+    .
+
+xo:dsd-xoAccess a qb:DataStructureDefinition;
+    qb:component
+    # The dimensions
+        [ qb:dimension xo:refAgent;        qb:order 1 ],
+        [ qb:dimension xo:refPeriod;       qb:order 2; qb:componentAttachment qb:Slice ];
+
+    # The measure(s)
+    qb:component [ qb:measure xo:Access];
+
+    # The attributes
+    qb:component [ qb:attribute sdmx-attribute:unitMeasure;
+                   qb:componentRequired "true"^^xsd:boolean;
+                   qb:componentAttachment qb:DataSet; ]
     .
 
 
@@ -100,16 +210,37 @@ xo:refAgent  a rdf:Property, qb:DimensionProperty;
 
 xo:refTime  a rdf:Property, qb:DimensionProperty;
     rdfs:label "reference Time"@en;
-    rdfs:range #WELCHE RANGE?
     qb:concept sdmx-concept:refTime ;
     .
 
 xo:outgoingMessages  a rdf:Property, qb:MeasureProperty;
     rdfs:label "number of outgoing messages"@en;
     rdfs:subPropertyOf sdmx-measure:obsValue;
-    rdfs:range xsd:integer ;
+    .
 
-#follower als weitere measure property einfügen
+xo:follower a rdf:Property, qb:MeasureProperty;
+    rdfs:label "number of followers"@en;
+    rdfs:subPropertyOf sdmx-measure:obsValue;
+    .
+
+xo:receivedMessages a rdf:Property, qb:MeasureProperty;
+    rdfs:label "number of received messages"@en;
+    rdfs:subPropertyOf sdmx-measure:obsValue;
+    .
+
+xo:triples a rdf:Property, qb:MeasureProperty;
+    rdfs:label "number of triples"@en;
+    rdfs:subPropertyOf sdmx-measure:obsValue;
+    .
+
+xo:size a rdf:Property, qb:MeasureProperty;
+    rdfs:label "size of the triple store"@en;
+    rdfs:subPropertyOf sdmx-measure:obsValue;
+    .
+
+xo:Access a rdf:Property, qb:MeasureProperty;
+    rdfs:label "Access time on timeline"@en;
+    rdfs:subPropertyOf sdmx-measure:obsValue;
     .
 
 # -- Observations -----------------------------------------
