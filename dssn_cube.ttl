@@ -18,6 +18,7 @@
 @prefix rdfs:     <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix owl:      <http://www.w3.org/2002/07/owl#> .
 @prefix xsd:      <http://www.w3.org/2001/XMLSchema#> .
+@prefix dbpedia:  <http://dbpedia.org/resource#>.
 @prefix skos:     <http://www.w3.org/2004/02/skos/core#> .
 @prefix void:     <http://rdfs.org/ns/void#> .
 @prefix dct:      <http://purl.org/dc/terms/> .
@@ -87,9 +88,9 @@ xo:dataset-xoSize a qb:DataSet;
     dct:publisher   xo:team-dssnpWiSe2014 ;
     dct:issued      "2014-02-01"^^xsd:date;
     qb:structure xo:dsd-xoSize ;
-    sdmx-attribute:unitMeasure xsd:kilobyte
+    sdmx-attribute:unitMeasure dbpedia:Kbyte
     .
-#TODO: KILOBYTE SUCHEN
+
 xo:dataset-xoAccess a qb:DataSet;
 #--xo dataset for virtuoso size
     dct:title       "Access time"@en;
@@ -97,9 +98,8 @@ xo:dataset-xoAccess a qb:DataSet;
     dct:publisher   xo:team-dssnpWiSe2014 ;
     dct:issued      "2014-02-01"^^xsd:date;
     qb:structure xo:dsd-xoAccess ;
-    sdmx-attribute:unitMeasure xsd:microseconds
+    sdmx-attribute:unitMeasure dbpedia:Microsecond
     .
-#TODO MICROSECONDS SUCHEN
 
 #our team
 xo:team-dssnpWiSe2014 a org:Organization;
