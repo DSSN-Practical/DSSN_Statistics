@@ -1,0 +1,227 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dbpedia: <http://dbpedia.org/resource#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix void: <http://rdfs.org/ns/void#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix interval: <http://reference.data.gov.uk/def/intervals/> .
+@prefix qb: <http://purl.org/linked-data/cube#> .
+@prefix sdmx-concept: <http://purl.org/linked-data/sdmx/2009/concept#> .
+@prefix sdmx-dimension: <http://purl.org/linked-data/sdmx/2009/dimension#> .
+@prefix sdmx-attribute: <http://purl.org/linked-data/sdmx/2009/attribute#> .
+@prefix sdmx-measure: <http://purl.org/linked-data/sdmx/2009/measure#> .
+@prefix sdmx-metadata: <http://purl.org/linked-data/sdmx/2009/metadata#> .
+@prefix sdmx-code: <http://purl.org/linked-data/sdmx/2009/code#> .
+@prefix sdmx-subject: <http://purl.org/linked-data/sdmx/2009/subject#> .
+@prefix xo: <http://xodx.dssn.org/> .
+
+xo:Access
+    qb:measure xo:value ;
+    a qb:MeasureProperty, rdf:Property ;
+    rdfs:label "Access time on timeline"@en ;
+    rdfs:subPropertyOf sdmx-measure:obsValue .
+
+xo:dataset-xoAccess
+    dct:issued "2014-02-01"^^xsd:date ;
+    dct:publisher xo:team-dssnpWiSe2014 ;
+    dct:title "Access time"@en ;
+    qb:structure xo:dsd-xoAccess ;
+    sdmx-attribute:unitMeasure dbpedia:Microsecond ;
+    a qb:DataSet ;
+    rdfs:comment "Time needed for one agent to view his current timeline"@en .
+
+xo:dataset-xoFollower
+    dct:issued "2014-02-01"^^xsd:date ;
+    dct:publisher xo:team-dssnpWiSe2014 ;
+    dct:title "Follower"@en ;
+    qb:structure xo:dsd-xoFollower ;
+    sdmx-attribute:unitMeasure xsd:integer ;
+    a qb:DataSet ;
+    rdfs:comment "Number of followers of one dssn node"@en .
+
+xo:dataset-xoIN
+    dct:issued "2014-02-01"^^xsd:date ;
+    dct:publisher xo:team-dssnpWiSe2014 ;
+    dct:title "messages received"@en ;
+    qb:structure xo:dsd-xoIN ;
+    sdmx-attribute:unitMeasure xsd:integer ;
+    a qb:DataSet ;
+    rdfs:comment "Number of incoming messages of one dssn node"@en .
+
+xo:dataset-xoOUT
+    dct:issued "2014-02-01"^^xsd:date ;
+    dct:publisher xo:team-dssnpWiSe2014 ;
+    dct:title "messages sent"@en ;
+    qb:structure xo:dsd-xoOUT ;
+    sdmx-attribute:unitMeasure xsd:integer ;
+    a qb:DataSet ;
+    rdfs:comment "Number of outgoing messages of one dssn node"@en .
+
+xo:dataset-xoSize
+    dct:issued "2014-02-01"^^xsd:date ;
+    dct:publisher xo:team-dssnpWiSe2014 ;
+    dct:title "Size"@en ;
+    qb:structure xo:dsd-xoSize ;
+    sdmx-attribute:unitMeasure dbpedia:Kbyte ;
+    a qb:DataSet ;
+    rdfs:comment "size of the virtuoso store of one dssn node"@en .
+
+xo:dataset-xoTriples
+    dct:issued "2014-02-01"^^xsd:date ;
+    dct:publisher xo:team-dssnpWiSe2014 ;
+    dct:title "Triples"@en ;
+    qb:structure xo:dsd-xoTriples ;
+    sdmx-attribute:unitMeasure xsd:integer ;
+    a qb:DataSet ;
+    rdfs:comment "Number of Triples of one dssn node"@en .
+
+xo:dsd-xoAccess
+    qb:component [
+        qb:dimension xo:refAgent ;
+        qb:order 1
+    ], [
+        qb:componentAttachment qb:Slice ;
+        qb:dimension xo:refTime ;
+        qb:order 2
+    ], [
+        qb:measure xo:Access
+    ], [
+        qb:attribute sdmx-attribute:unitMeasure ;
+        qb:componentAttachment qb:DataSet ;
+        qb:componentRequired true
+    ] ;
+    a qb:DataStructureDefinition .
+
+xo:dsd-xoFollower
+    qb:component [
+        qb:dimension xo:refAgent ;
+        qb:order 1
+    ], [
+        qb:componentAttachment qb:Slice ;
+        qb:dimension xo:refTime ;
+        qb:order 2
+    ], [
+        qb:measure xo:follower
+    ], [
+        qb:attribute sdmx-attribute:unitMeasure ;
+        qb:componentAttachment qb:DataSet ;
+        qb:componentRequired true
+    ] ;
+    a qb:DataStructureDefinition .
+
+xo:dsd-xoIN
+    qb:component [
+        qb:componentAttachment qb:Slice ;
+        qb:dimension xo:refTime ;
+        qb:order 2
+    ], [
+        qb:measure xo:receivedMessages
+    ], [
+        qb:attribute sdmx-attribute:unitMeasure ;
+        qb:componentAttachment qb:DataSet ;
+        qb:componentRequired true
+    ], [
+        qb:dimension xo:refAgent ;
+        qb:order 1
+    ] ;
+    a qb:DataStructureDefinition .
+
+xo:dsd-xoOUT
+    qb:component [
+        qb:dimension xo:refAgent ;
+        qb:order 1
+    ], [
+        qb:componentAttachment qb:Slice ;
+        qb:dimension xo:refTime ;
+        qb:order 2
+    ], [
+        qb:measure xo:outgoingMessages
+    ], [
+        qb:attribute sdmx-attribute:unitMeasure ;
+        qb:componentAttachment qb:DataSet ;
+        qb:componentRequired true
+    ] ;
+    a qb:DataStructureDefinition .
+
+xo:dsd-xoSize
+    qb:component [
+        qb:dimension xo:refAgent ;
+        qb:order 1
+    ], [
+        qb:componentAttachment qb:Slice ;
+        qb:dimension xo:refTime ;
+        qb:order 2
+    ], [
+        qb:measure xo:size
+    ], [
+        qb:attribute sdmx-attribute:unitMeasure ;
+        qb:componentAttachment qb:DataSet ;
+        qb:componentRequired true
+    ] ;
+    a qb:DataStructureDefinition .
+
+xo:dsd-xoTriples
+    qb:component [
+        qb:dimension xo:refAgent ;
+        qb:order 1
+    ], [
+        qb:componentAttachment qb:Slice ;
+        qb:dimension xo:refTime ;
+        qb:order 2
+    ], [
+        qb:measure xo:triples
+    ], [
+        qb:attribute sdmx-attribute:unitMeasure ;
+        qb:componentAttachment qb:DataSet ;
+        qb:componentRequired true
+    ] ;
+    a qb:DataStructureDefinition .
+
+xo:follower
+    qb:measure xo:value ;
+    a qb:MeasureProperty, rdf:Property ;
+    rdfs:label "number of followers"@en ;
+    rdfs:subPropertyOf sdmx-measure:obsValue .
+
+xo:outgoingMessages
+    qb:measure xo:value ;
+    a qb:MeasureProperty, rdf:Property ;
+    rdfs:label "number of outgoing messages"@en ;
+    rdfs:subPropertyOf sdmx-measure:obsValue .
+
+xo:receivedMessages
+    qb:measure xo:value ;
+    a qb:MeasureProperty, rdf:Property ;
+    rdfs:label "number of received messages"@en ;
+    rdfs:subPropertyOf sdmx-measure:obsValue .
+
+xo:refAgent
+    qb:dimension xo:refAgent ;
+    a qb:ComponentSpecification, qb:DimensionProperty, rdf:Property ;
+    rdfs:label "Xodx Agent"@en .
+
+xo:refTime
+    qb:dimension xo:refTime ;
+    a qb:ComponentSpecification, qb:DimensionProperty, rdf:Property ;
+    rdfs:label "reference Time"@en .
+
+xo:size
+    qb:measure xo:value ;
+    a qb:MeasureProperty, rdf:Property ;
+    rdfs:label "size of the triple store"@en ;
+    rdfs:subPropertyOf sdmx-measure:obsValue .
+
+xo:team-dssnpWiSe2014
+    a org:Organization ;
+    rdfs:label "DSSN Team WiSe 2014/2015"@en .
+
+xo:triples
+    qb:measure xo:value ;
+    a qb:MeasureProperty, rdf:Property ;
+    rdfs:label "number of triples"@en ;
+    rdfs:subPropertyOf sdmx-measure:obsValue .
+

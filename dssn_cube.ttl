@@ -113,7 +113,7 @@ xo:dsd-xoFollower a qb:DataStructureDefinition;
     qb:component
     # The dimensions
         [ qb:dimension xo:refAgent;        qb:order 1 ],
-        [ qb:dimension xo:refPeriod;       qb:order 2; qb:componentAttachment qb:Slice ];
+        [ qb:dimension xo:refTime;       qb:order 2; qb:componentAttachment qb:Slice ];
 
     # The measure(s)
     qb:component [ qb:measure xo:follower];
@@ -128,7 +128,7 @@ xo:dsd-xoOUT a qb:DataStructureDefinition;
     qb:component
     # The dimensions
         [ qb:dimension xo:refAgent;        qb:order 1 ],
-        [ qb:dimension xo:refPeriod;       qb:order 2; qb:componentAttachment qb:Slice ];
+        [ qb:dimension xo:refTime;       qb:order 2; qb:componentAttachment qb:Slice ];
 
     # The measure(s)
     qb:component [ qb:measure xo:outgoingMessages];
@@ -143,7 +143,7 @@ xo:dsd-xoIN a qb:DataStructureDefinition;
     qb:component
     # The dimensions
         [ qb:dimension xo:refAgent;        qb:order 1 ],
-        [ qb:dimension xo:refPeriod;       qb:order 2; qb:componentAttachment qb:Slice ];
+        [ qb:dimension xo:refTime;       qb:order 2; qb:componentAttachment qb:Slice ];
 
     # The measure(s)
     qb:component [ qb:measure xo:receivedMessages];
@@ -158,7 +158,7 @@ xo:dsd-xoTriples a qb:DataStructureDefinition;
     qb:component
     # The dimensions
         [ qb:dimension xo:refAgent;        qb:order 1 ],
-        [ qb:dimension xo:refPeriod;       qb:order 2; qb:componentAttachment qb:Slice ];
+        [ qb:dimension xo:refTime;       qb:order 2; qb:componentAttachment qb:Slice ];
 
     # The measure(s)
     qb:component [ qb:measure xo:triples];
@@ -173,7 +173,7 @@ xo:dsd-xoSize a qb:DataStructureDefinition;
     qb:component
     # The dimensions
         [ qb:dimension xo:refAgent;        qb:order 1 ],
-        [ qb:dimension xo:refPeriod;       qb:order 2; qb:componentAttachment qb:Slice ];
+        [ qb:dimension xo:refTime;       qb:order 2; qb:componentAttachment qb:Slice ];
 
     # The measure(s)
     qb:component [ qb:measure xo:size];
@@ -188,7 +188,7 @@ xo:dsd-xoAccess a qb:DataStructureDefinition;
     qb:component
     # The dimensions
         [ qb:dimension xo:refAgent;        qb:order 1 ],
-        [ qb:dimension xo:refPeriod;       qb:order 2; qb:componentAttachment qb:Slice ];
+        [ qb:dimension xo:refTime;       qb:order 2; qb:componentAttachment qb:Slice ];
 
     # The measure(s)
     qb:component [ qb:measure xo:Access];
@@ -202,45 +202,53 @@ xo:dsd-xoAccess a qb:DataStructureDefinition;
 
 # -- Dimensions and measures  ----------------------------
 
-xo:refAgent  a rdf:Property, qb:DimensionProperty;
+xo:refAgent  a rdf:Property, qb:ComponentSpecification, qb:DimensionProperty;
     rdfs:label "Xodx Agent"@en;
-    qb:concept sdmx-concept:refAgent ;
+    qb:dimension xo:refAgent ;
     .
+#-- TODO: xo:refAgent, refTime
 
 
-xo:refTime  a rdf:Property, qb:DimensionProperty;
+xo:refTime  a rdf:Property, qb:ComponentSpecification, qb:DimensionProperty;
     rdfs:label "reference Time"@en;
-    qb:concept sdmx-concept:refTime ;
+    qb:dimension xo:refTime ;
     .
 
+#--TODO xo:value
 xo:outgoingMessages  a rdf:Property, qb:MeasureProperty;
     rdfs:label "number of outgoing messages"@en;
     rdfs:subPropertyOf sdmx-measure:obsValue;
+    qb:measure xo:value;
     .
 
 xo:follower a rdf:Property, qb:MeasureProperty;
     rdfs:label "number of followers"@en;
     rdfs:subPropertyOf sdmx-measure:obsValue;
+    qb:measure xo:value;
     .
 
 xo:receivedMessages a rdf:Property, qb:MeasureProperty;
     rdfs:label "number of received messages"@en;
     rdfs:subPropertyOf sdmx-measure:obsValue;
+    qb:measure xo:value;
     .
 
 xo:triples a rdf:Property, qb:MeasureProperty;
     rdfs:label "number of triples"@en;
     rdfs:subPropertyOf sdmx-measure:obsValue;
+    qb:measure xo:value;
     .
 
 xo:size a rdf:Property, qb:MeasureProperty;
     rdfs:label "size of the triple store"@en;
     rdfs:subPropertyOf sdmx-measure:obsValue;
+    qb:measure xo:value;
     .
 
 xo:Access a rdf:Property, qb:MeasureProperty;
     rdfs:label "Access time on timeline"@en;
     rdfs:subPropertyOf sdmx-measure:obsValue;
+    qb:measure xo:value;
     .
 
 # -- Observations -----------------------------------------
