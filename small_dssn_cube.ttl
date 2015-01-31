@@ -1,0 +1,103 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dbpedia: <http://dbpedia.org/resource#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix void: <http://rdfs.org/ns/void#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix interval: <http://reference.data.gov.uk/def/intervals/> .
+@prefix qb: <http://purl.org/linked-data/cube#> .
+@prefix sdmx-concept: <http://purl.org/linked-data/sdmx/2009/concept#> .
+@prefix sdmx-dimension: <http://purl.org/linked-data/sdmx/2009/dimension#> .
+@prefix sdmx-attribute: <http://purl.org/linked-data/sdmx/2009/attribute#> .
+@prefix sdmx-measure: <http://purl.org/linked-data/sdmx/2009/measure#> .
+@prefix sdmx-metadata: <http://purl.org/linked-data/sdmx/2009/metadata#> .
+@prefix sdmx-code: <http://purl.org/linked-data/sdmx/2009/code#> .
+@prefix sdmx-subject: <http://purl.org/linked-data/sdmx/2009/subject#> .
+@prefix xo: <http://xodx.dssn.org/> .
+
+# -- Data Sets --------------------------------------------
+xo:dataset-xoFollower a qb:DataSet;
+#--xo dataset for follower
+    rdfs:label      "Follower"@en;
+    rdfs:comment    "Number of followers of one dssn node"@en;
+    dct:publisher   xo:team-dssnpWiSe2014 ;
+    dct:issued      "2014-02-01"^^xsd:date;
+    qb:structure xo:dsd-xoFollower ;
+    sdmx-attribute:unitMeasure xsd:integer
+    .
+
+
+# -- Data structure definition ----------------------------
+
+# pro messgröße eine DataStructureDefinition
+xo:dsd-xoFollower a qb:DataStructureDefinition;
+    rdfs:label "Follower Data Structure Definition"@en ;
+    qb:component xo:CSrefAgent,
+        xo:CSrefTime,
+        xo:CSfollower,
+        xo:CSvalue.
+
+#-------------------------components
+xo:CSrefAgent  a rdf:Property, qb:ComponentSpecification; 
+    rdfs:label "Xodx Agent Component"@en;
+    qb:dimension xo:refAgent ;
+    .
+
+xo:CSrefTime  a rdf:Property, qb:ComponentSpecification;
+    rdfs:label "reference Time Component"@en;
+    qb:dimension xo:refTime ;
+    .
+
+xo:CSfollower a rdf:Property, qb:ComponentSpecification;
+    rdfs:label "number of followers Component"@en;
+    qb:attribute xo:unit ;
+    .
+
+xo:CSvalue a rdf:Property, qb:ComponentSpecification;
+    rdfs:label "number of followers Component"@en;
+    qb:measure xo:value ;
+    .
+
+#-----------dimensions, units and measure
+
+xo:refAgent a qb:DimensionProperty ;
+    rdfs:label "Agent Dimension"@en .
+
+xo:refTime a qb:DimensionProperty ;
+    rdfs:label "Time Dimension"@en .
+
+xo:unit a qb:AttributeProperty ;
+    rdfs:label "Another Unit" .
+
+xo:value a qb:MeasureProperty ;
+    rdfs:label "Value"@en .
+
+#-------------------------observations
+xo:o01 a qb:Observation;
+    qb:dataSet  xo:dataset-xoFollower ;
+    xo:refAgent xo:agent01 ;
+    xo:refTime  1 ;                  
+    xo:value 20 ;
+    .
+xo:o02 a qb:Observation;
+    qb:dataSet  xo:dataset-xoFollower ;
+    xo:refAgent xo:agent01 ;
+    xo:refTime  2 ;                  
+    xo:value 30 ;
+    .
+xo:o03 a qb:Observation;
+    qb:dataSet  xo:dataset-xoFollower ;
+    xo:refAgent xo:agent02 ;
+    xo:refTime  1 ;                  
+    xo:value 40 ;
+    .
+xo:o04 a qb:Observation;
+    qb:dataSet  xo:dataset-xoFollower ;
+    xo:refAgent xo:agent02 ;
+    xo:refTime  2 ;                  
+    xo:value 20 ;
+    .

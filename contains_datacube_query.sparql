@@ -14,7 +14,7 @@ PREFIX qb:<http://purl.org/linked-data/cube#>
                 ?datastructuredefintion qb:component ?measurespecification .
 
                 ?dimensionspecification a qb:ComponentSpecification .
-                ?dimensionpecification qb:dimension ?dimension .
+                ?dimensionspecification qb:dimension ?dimension .
 
                 ?measurespecification a qb:ComponentSpecification .
                 ?measurespecification qb:measure ?measure .
