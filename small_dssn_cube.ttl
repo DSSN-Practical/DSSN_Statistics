@@ -58,7 +58,7 @@ xo:CSfollower a rdf:Property, qb:ComponentSpecification;
     .
 
 xo:CSvalue a rdf:Property, qb:ComponentSpecification;
-    rdfs:label "number of followers Component"@en;
+    rdfs:label "Value Measure Component"@en;
     qb:measure xo:value ;
     .
 
@@ -74,6 +74,7 @@ xo:unit a qb:AttributeProperty ;
     rdfs:label "Another Unit" .
 
 xo:value a qb:MeasureProperty ;
+    rdfs:subPropertyOf sdmx-measure:obsValue;
     rdfs:label "Value"@en .
 
 #-------------------------observations
