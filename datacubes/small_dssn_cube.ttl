@@ -35,11 +35,19 @@ xo:dataset-xoFollower a qb:DataSet;
 
 # pro messgröße eine DataStructureDefinition
 xo:dsd-xoFollower a qb:DataStructureDefinition;
-    rdfs:label "Follower Data Structure Definition"@en ;
-    qb:component xo:CSrefAgent,
-        xo:CSrefTime,
-        xo:CSfollower,
-        xo:CSvalue.
+    qb:component
+    # The dimensions
+        [ qb:dimension xo:refAgent;      qb:order 1 ],
+        [ qb:dimension xo:refTime;       qb:order 2; qb:componentAttachment qb:Slice ];
+
+    # The measure(s)
+    qb:component [ qb:measure [xo:follower a qb:MeasureProperty]];
+
+    # The attributes
+    qb:component [ qb:attribute sdmx-attribute:unitMeasure;
+                   qb:componentRequired "true"^^xsd:boolean;
+                   qb:componentAttachment qb:DataSet; ]
+    .
 
 #-------------------------components
 xo:CSrefAgent  a rdf:Property, qb:ComponentSpecification; 

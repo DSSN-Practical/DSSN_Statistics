@@ -7,6 +7,6 @@ PREFIX owl:     <http://www.w3.org/2002/07/owl#>
 #dsd includes measure
 ASK {
   ?dsd a qb:DataStructureDefinition .
-  FILTER NOT EXISTS { ?dsd qb:component [qb:componentProperty [a qb:MeasureProperty]] }
+  FILTER NOT EXISTS { ?dsd qb:component [qb:measure [a qb:MeasureProperty]] }
 }
     
