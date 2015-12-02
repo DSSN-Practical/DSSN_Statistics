@@ -1,6 +1,7 @@
 PREFIX qb:<http://purl.org/linked-data/cube#>
 PREFIX xo:<http://xodx.dssn.org/>
-SELECT ?timeStamp ?agent ?follower ?messagesSent ?messagesReceived
+SELECT ?timeStamp (SUM(?follower*?messagesSent) AS ?messagesOut) (SUM(?messagesReceived) AS ?messagesIn)
+#?messagesReceived
 WHERE {
     ?observation1 xo:refTime ?timeStamp;
         xo:refAgent ?agent;
@@ -12,6 +13,7 @@ WHERE {
         xo:refAgent ?agent;
         xo:receivedMessages ?messagesReceived.
 }
+GROUP BY ?timeStamp
 ORDER BY ?timeStamp
 
 
