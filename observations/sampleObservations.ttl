@@ -26,28 +26,80 @@
 #---our dssn prefix
 @prefix xo:	       <http://xodx.dssn.org/>.
 
-#---observations
+#---observations: two agents following each other
 xo:o01 a qb:Observation;
     qb:dataSet  xo:dataset-xoFollower ;
     xo:refAgent xo:agent01 ;
     xo:refTime  1 ;                  
-    xo:follower 20 ;
+    xo:follower 1 ;
     .
 xo:o02 a qb:Observation;
     qb:dataSet  xo:dataset-xoFollower ;
     xo:refAgent xo:agent01 ;
     xo:refTime  2 ;                  
-    xo:follower 30 ;
+    xo:follower 1 ;
     .
 xo:o03 a qb:Observation;
     qb:dataSet  xo:dataset-xoFollower ;
     xo:refAgent xo:agent02 ;
     xo:refTime  1 ;                  
-    xo:follower 40 ;
+    xo:follower 1 ;
     .
 xo:o04 a qb:Observation;
     qb:dataSet  xo:dataset-xoFollower ;
     xo:refAgent xo:agent02 ;
     xo:refTime  2 ;                  
-    xo:follower 20 ;
+    xo:follower 1 ;
     .
+#outgoing messages: two agents messaging 5, 10, 3 and 10 messages on two timestamps
+xo:o11 a qb:Observation;
+    qb:dataSet   xo:dataset-xoOUT ;
+    xo:refAgent xo:agent01 ;
+    xo:refTime  1 ;                  
+    xo:outgoingMessages 5 ;
+    .
+xo:o12 a qb:Observation;
+    qb:dataSet   xo:dataset-xoOUT ;
+    xo:refAgent xo:agent01 ;
+    xo:refTime  2 ;                  
+    xo:outgoingMessages 10 ;
+    .
+xo:o13 a qb:Observation;
+    qb:dataSet   xo:dataset-xoOUT ;
+    xo:refAgent xo:agent02 ;
+    xo:refTime  1 ;                  
+    xo:outgoingMessages 3 ;
+    .
+xo:o14 a qb:Observation;
+    qb:dataSet   xo:dataset-xoOUT ;
+    xo:refAgent xo:agent02 ;
+    xo:refTime  2 ;                  
+    xo:outgoingMessages 10 ;
+    .
+#received messages: one lost on agent 2 timestamp 2
+xo:o21 a qb:Observation;
+    qb:dataSet   xo:dataset-xoIN ;
+    xo:refAgent xo:agent01 ;
+    xo:refTime  1 ;                  
+    xo:receivedMessages 3 ;
+    .
+xo:o22 a qb:Observation;
+    qb:dataSet   xo:dataset-xoIN ;
+    xo:refAgent xo:agent01 ;
+    xo:refTime  2 ;                  
+    xo:receivedMessages 10 ;
+    .
+xo:o23 a qb:Observation;
+    qb:dataSet   xo:dataset-xoIN ;
+    xo:refAgent xo:agent02 ;
+    xo:refTime  1 ;                  
+    xo:receivedMessages 5 ;
+    .
+xo:o24 a qb:Observation;
+    qb:dataSet   xo:dataset-xoIN ;
+    xo:refAgent xo:agent02 ;
+    xo:refTime  2 ;                  
+    xo:receivedMessages 9 ;
+    .
+#todo: triples, size, access
+

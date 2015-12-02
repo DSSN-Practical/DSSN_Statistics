@@ -13,7 +13,7 @@
     <xo:refTime rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</xo:refTime>
   </rdf:Description>
   <rdf:Description rdf:about="http://xodx.dssn.org/o01">
-    <xo:follower rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">20</xo:follower>
+    <xo:follower rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</xo:follower>
   </rdf:Description>
   <rdf:Description rdf:about="http://xodx.dssn.org/o02">
     <rdf:type rdf:resource="http://purl.org/linked-data/cube#Observation"/>
@@ -28,7 +28,7 @@
     <xo:refTime rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</xo:refTime>
   </rdf:Description>
   <rdf:Description rdf:about="http://xodx.dssn.org/o02">
-    <xo:follower rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">30</xo:follower>
+    <xo:follower rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</xo:follower>
   </rdf:Description>
   <rdf:Description rdf:about="http://xodx.dssn.org/o03">
     <rdf:type rdf:resource="http://purl.org/linked-data/cube#Observation"/>
@@ -43,7 +43,7 @@
     <xo:refTime rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</xo:refTime>
   </rdf:Description>
   <rdf:Description rdf:about="http://xodx.dssn.org/o03">
-    <xo:follower rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">40</xo:follower>
+    <xo:follower rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</xo:follower>
   </rdf:Description>
   <rdf:Description rdf:about="http://xodx.dssn.org/o04">
     <rdf:type rdf:resource="http://purl.org/linked-data/cube#Observation"/>
@@ -58,6 +58,126 @@
     <xo:refTime rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</xo:refTime>
   </rdf:Description>
   <rdf:Description rdf:about="http://xodx.dssn.org/o04">
-    <xo:follower rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">20</xo:follower>
+    <xo:follower rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</xo:follower>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://xodx.dssn.org/o11">
+    <rdf:type rdf:resource="http://purl.org/linked-data/cube#Observation"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://xodx.dssn.org/o11">
+    <qb:dataSet rdf:resource="http://xodx.dssn.org/dataset-xoOUT"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://xodx.dssn.org/o11">
+    <xo:refAgent rdf:resource="http://xodx.dssn.org/agent01"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://xodx.dssn.org/o11">
+    <xo:refTime rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</xo:refTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://xodx.dssn.org/o11">
+    <xo:outgoingMessages rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5</xo:outgoingMessages>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://xodx.dssn.org/o12">
+    <rdf:type rdf:resource="http://purl.org/linked-data/cube#Observation"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://xodx.dssn.org/o12">
+    <qb:dataSet rdf:resource="http://xodx.dssn.org/dataset-xoOUT"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://xodx.dssn.org/o12">
+    <xo:refAgent rdf:resource="http://xodx.dssn.org/agent01"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://xodx.dssn.org/o12">
+    <xo:refTime rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</xo:refTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://xodx.dssn.org/o12">
+    <xo:outgoingMessages rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10</xo:outgoingMessages>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://xodx.dssn.org/o13">
+    <rdf:type rdf:resource="http://purl.org/linked-data/cube#Observation"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://xodx.dssn.org/o13">
+    <qb:dataSet rdf:resource="http://xodx.dssn.org/dataset-xoOUT"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://xodx.dssn.org/o13">
+    <xo:refAgent rdf:resource="http://xodx.dssn.org/agent02"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://xodx.dssn.org/o13">
+    <xo:refTime rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</xo:refTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://xodx.dssn.org/o13">
+    <xo:outgoingMessages rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3</xo:outgoingMessages>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://xodx.dssn.org/o14">
+    <rdf:type rdf:resource="http://purl.org/linked-data/cube#Observation"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://xodx.dssn.org/o14">
+    <qb:dataSet rdf:resource="http://xodx.dssn.org/dataset-xoOUT"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://xodx.dssn.org/o14">
+    <xo:refAgent rdf:resource="http://xodx.dssn.org/agent02"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://xodx.dssn.org/o14">
+    <xo:refTime rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</xo:refTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://xodx.dssn.org/o14">
+    <xo:outgoingMessages rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10</xo:outgoingMessages>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://xodx.dssn.org/o21">
+    <rdf:type rdf:resource="http://purl.org/linked-data/cube#Observation"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://xodx.dssn.org/o21">
+    <qb:dataSet rdf:resource="http://xodx.dssn.org/dataset-xoIN"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://xodx.dssn.org/o21">
+    <xo:refAgent rdf:resource="http://xodx.dssn.org/agent01"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://xodx.dssn.org/o21">
+    <xo:refTime rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</xo:refTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://xodx.dssn.org/o21">
+    <xo:receivedMessages rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3</xo:receivedMessages>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://xodx.dssn.org/o22">
+    <rdf:type rdf:resource="http://purl.org/linked-data/cube#Observation"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://xodx.dssn.org/o22">
+    <qb:dataSet rdf:resource="http://xodx.dssn.org/dataset-xoIN"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://xodx.dssn.org/o22">
+    <xo:refAgent rdf:resource="http://xodx.dssn.org/agent01"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://xodx.dssn.org/o22">
+    <xo:refTime rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</xo:refTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://xodx.dssn.org/o22">
+    <xo:receivedMessages rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10</xo:receivedMessages>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://xodx.dssn.org/o23">
+    <rdf:type rdf:resource="http://purl.org/linked-data/cube#Observation"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://xodx.dssn.org/o23">
+    <qb:dataSet rdf:resource="http://xodx.dssn.org/dataset-xoIN"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://xodx.dssn.org/o23">
+    <xo:refAgent rdf:resource="http://xodx.dssn.org/agent02"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://xodx.dssn.org/o23">
+    <xo:refTime rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</xo:refTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://xodx.dssn.org/o23">
+    <xo:receivedMessages rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5</xo:receivedMessages>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://xodx.dssn.org/o24">
+    <rdf:type rdf:resource="http://purl.org/linked-data/cube#Observation"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://xodx.dssn.org/o24">
+    <qb:dataSet rdf:resource="http://xodx.dssn.org/dataset-xoIN"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://xodx.dssn.org/o24">
+    <xo:refAgent rdf:resource="http://xodx.dssn.org/agent02"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://xodx.dssn.org/o24">
+    <xo:refTime rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</xo:refTime>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://xodx.dssn.org/o24">
+    <xo:receivedMessages rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">9</xo:receivedMessages>
   </rdf:Description>
 </rdf:RDF>
