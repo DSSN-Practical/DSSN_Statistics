@@ -15,6 +15,3 @@ WHERE {
 }
 GROUP BY ?timeStamp
 ORDER BY ?timeStamp
-
-
-# for timestamp: sum [ timestamp:agent:follower x timestamp:agent:messagesSent] | allmessagesreceived
