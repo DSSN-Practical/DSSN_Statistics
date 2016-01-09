@@ -1,25 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <rdf:RDF xmlns:dbpedia="http://dbpedia.org/resource#" xmlns:dct="http://purl.org/dc/terms/" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:interval="http://reference.data.gov.uk/def/intervals/" xmlns:org="http://www.w3.org/ns/org#" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:qb="http://purl.org/linked-data/cube#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:sdmx-attribute="http://purl.org/linked-data/sdmx/2009/attribute#" xmlns:sdmx-code="http://purl.org/linked-data/sdmx/2009/code#" xmlns:sdmx-concept="http://purl.org/linked-data/sdmx/2009/concept#" xmlns:sdmx-dimension="http://purl.org/linked-data/sdmx/2009/dimension#" xmlns:sdmx-measure="http://purl.org/linked-data/sdmx/2009/measure#" xmlns:sdmx-metadata="http://purl.org/linked-data/sdmx/2009/metadata#" xmlns:sdmx-subject="http://purl.org/linked-data/sdmx/2009/subject#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:void="http://rdfs.org/ns/void#" xmlns:xo="http://xodx.dssn.org/" xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
-  <rdf:Description rdf:about="http://xodx.dssn.org/dataset-xoFollower">
+  <rdf:Description rdf:about="http://xodx.dssn.org/dataset-xoFollowers">
     <rdf:type rdf:resource="http://purl.org/linked-data/cube#DataSet"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://xodx.dssn.org/dataset-xoFollower">
-    <dct:title xml:lang="en">Follower</dct:title>
+  <rdf:Description rdf:about="http://xodx.dssn.org/dataset-xoFollowers">
+    <dct:title xml:lang="en">followers</dct:title>
   </rdf:Description>
-  <rdf:Description rdf:about="http://xodx.dssn.org/dataset-xoFollower">
-    <rdfs:comment xml:lang="en">Number of followers of one dssn node</rdfs:comment>
+  <rdf:Description rdf:about="http://xodx.dssn.org/dataset-xoFollowers">
+    <rdfs:comment xml:lang="en">Number of followers of one dssn user</rdfs:comment>
   </rdf:Description>
-  <rdf:Description rdf:about="http://xodx.dssn.org/dataset-xoFollower">
+  <rdf:Description rdf:about="http://xodx.dssn.org/dataset-xoFollowers">
     <dct:publisher rdf:resource="http://xodx.dssn.org/team-dssnpWiSe2014"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://xodx.dssn.org/dataset-xoFollower">
+  <rdf:Description rdf:about="http://xodx.dssn.org/dataset-xoFollowers">
     <dct:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2014-02-01</dct:issued>
   </rdf:Description>
-  <rdf:Description rdf:about="http://xodx.dssn.org/dataset-xoFollower">
-    <qb:structure rdf:resource="http://xodx.dssn.org/dsd-xoFollower"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://xodx.dssn.org/dataset-xoFollower">
-    <sdmx-attribute:unitMeasure rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+  <rdf:Description rdf:about="http://xodx.dssn.org/dataset-xoFollowers">
+    <qb:structure rdf:resource="http://xodx.dssn.org/dsd-xoFollowers"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://xodx.dssn.org/dataset-xoOUT">
     <rdf:type rdf:resource="http://purl.org/linked-data/cube#DataSet"/>
@@ -84,27 +81,6 @@
   <rdf:Description rdf:about="http://xodx.dssn.org/dataset-xoTriples">
     <sdmx-attribute:unitMeasure rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://xodx.dssn.org/dataset-xoSize">
-    <rdf:type rdf:resource="http://purl.org/linked-data/cube#DataSet"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://xodx.dssn.org/dataset-xoSize">
-    <dct:title xml:lang="en">Size</dct:title>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://xodx.dssn.org/dataset-xoSize">
-    <rdfs:comment xml:lang="en">size of the virtuoso store of one dssn node</rdfs:comment>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://xodx.dssn.org/dataset-xoSize">
-    <dct:publisher rdf:resource="http://xodx.dssn.org/team-dssnpWiSe2014"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://xodx.dssn.org/dataset-xoSize">
-    <dct:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2014-02-01</dct:issued>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://xodx.dssn.org/dataset-xoSize">
-    <qb:structure rdf:resource="http://xodx.dssn.org/dsd-xoSize"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://xodx.dssn.org/dataset-xoSize">
-    <sdmx-attribute:unitMeasure rdf:resource="http://dbpedia.org/resource#Kbyte"/>
-  </rdf:Description>
   <rdf:Description rdf:about="http://xodx.dssn.org/dataset-xoAccess">
     <rdf:type rdf:resource="http://purl.org/linked-data/cube#DataSet"/>
   </rdf:Description>
@@ -148,7 +124,7 @@
     <qb:componentAttachment rdf:resource="http://purl.org/linked-data/cube#Slice"/>
   </rdf:Description>
   <rdf:Description rdf:nodeID="genid3">
-    <qb:measure rdf:resource="http://xodx.dssn.org/follower"/>
+    <qb:measure rdf:resource="http://xodx.dssn.org/follows"/>
   </rdf:Description>
   <rdf:Description rdf:nodeID="genid4">
     <qb:attribute rdf:resource="http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"/>
@@ -159,19 +135,19 @@
   <rdf:Description rdf:nodeID="genid4">
     <qb:componentAttachment rdf:resource="http://purl.org/linked-data/cube#DataSet"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://xodx.dssn.org/dsd-xoFollower">
+  <rdf:Description rdf:about="http://xodx.dssn.org/dsd-xoFollowers">
     <rdf:type rdf:resource="http://purl.org/linked-data/cube#DataStructureDefinition"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://xodx.dssn.org/dsd-xoFollower">
+  <rdf:Description rdf:about="http://xodx.dssn.org/dsd-xoFollowers">
     <qb:component rdf:nodeID="genid1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://xodx.dssn.org/dsd-xoFollower">
+  <rdf:Description rdf:about="http://xodx.dssn.org/dsd-xoFollowers">
     <qb:component rdf:nodeID="genid2"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://xodx.dssn.org/dsd-xoFollower">
+  <rdf:Description rdf:about="http://xodx.dssn.org/dsd-xoFollowers">
     <qb:component rdf:nodeID="genid3"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://xodx.dssn.org/dsd-xoFollower">
+  <rdf:Description rdf:about="http://xodx.dssn.org/dsd-xoFollowers">
     <qb:component rdf:nodeID="genid4"/>
   </rdf:Description>
   <rdf:Description rdf:nodeID="genid5">
@@ -316,73 +292,31 @@
     <qb:componentAttachment rdf:resource="http://purl.org/linked-data/cube#Slice"/>
   </rdf:Description>
   <rdf:Description rdf:nodeID="genid19">
-    <qb:measure rdf:resource="http://xodx.dssn.org/size"/>
-  </rdf:Description>
-  <rdf:Description rdf:nodeID="genid20">
-    <qb:attribute rdf:resource="http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"/>
-  </rdf:Description>
-  <rdf:Description rdf:nodeID="genid20">
-    <qb:componentRequired rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</qb:componentRequired>
-  </rdf:Description>
-  <rdf:Description rdf:nodeID="genid20">
-    <qb:componentAttachment rdf:resource="http://purl.org/linked-data/cube#DataSet"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://xodx.dssn.org/dsd-xoSize">
-    <rdf:type rdf:resource="http://purl.org/linked-data/cube#DataStructureDefinition"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://xodx.dssn.org/dsd-xoSize">
-    <qb:component rdf:nodeID="genid17"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://xodx.dssn.org/dsd-xoSize">
-    <qb:component rdf:nodeID="genid18"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://xodx.dssn.org/dsd-xoSize">
-    <qb:component rdf:nodeID="genid19"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://xodx.dssn.org/dsd-xoSize">
-    <qb:component rdf:nodeID="genid20"/>
-  </rdf:Description>
-  <rdf:Description rdf:nodeID="genid21">
-    <qb:dimension rdf:resource="http://xodx.dssn.org/refAgent"/>
-  </rdf:Description>
-  <rdf:Description rdf:nodeID="genid21">
-    <qb:order rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</qb:order>
-  </rdf:Description>
-  <rdf:Description rdf:nodeID="genid22">
-    <qb:dimension rdf:resource="http://xodx.dssn.org/refTime"/>
-  </rdf:Description>
-  <rdf:Description rdf:nodeID="genid22">
-    <qb:order rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</qb:order>
-  </rdf:Description>
-  <rdf:Description rdf:nodeID="genid22">
-    <qb:componentAttachment rdf:resource="http://purl.org/linked-data/cube#Slice"/>
-  </rdf:Description>
-  <rdf:Description rdf:nodeID="genid23">
     <qb:measure rdf:resource="http://xodx.dssn.org/Access"/>
   </rdf:Description>
-  <rdf:Description rdf:nodeID="genid24">
+  <rdf:Description rdf:nodeID="genid20">
     <qb:attribute rdf:resource="http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"/>
   </rdf:Description>
-  <rdf:Description rdf:nodeID="genid24">
+  <rdf:Description rdf:nodeID="genid20">
     <qb:componentRequired rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</qb:componentRequired>
   </rdf:Description>
-  <rdf:Description rdf:nodeID="genid24">
+  <rdf:Description rdf:nodeID="genid20">
     <qb:componentAttachment rdf:resource="http://purl.org/linked-data/cube#DataSet"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://xodx.dssn.org/dsd-xoAccess">
     <rdf:type rdf:resource="http://purl.org/linked-data/cube#DataStructureDefinition"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://xodx.dssn.org/dsd-xoAccess">
-    <qb:component rdf:nodeID="genid21"/>
+    <qb:component rdf:nodeID="genid17"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://xodx.dssn.org/dsd-xoAccess">
-    <qb:component rdf:nodeID="genid22"/>
+    <qb:component rdf:nodeID="genid18"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://xodx.dssn.org/dsd-xoAccess">
-    <qb:component rdf:nodeID="genid23"/>
+    <qb:component rdf:nodeID="genid19"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://xodx.dssn.org/dsd-xoAccess">
-    <qb:component rdf:nodeID="genid24"/>
+    <qb:component rdf:nodeID="genid20"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://xodx.dssn.org/refAgent">
     <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
@@ -420,16 +354,16 @@
   <rdf:Description rdf:about="http://xodx.dssn.org/outgoingMessages">
     <rdfs:subPropertyOf rdf:resource="http://purl.org/linked-data/sdmx/2009/measure#obsValue"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://xodx.dssn.org/follower">
+  <rdf:Description rdf:about="http://xodx.dssn.org/follows">
     <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://xodx.dssn.org/follower">
+  <rdf:Description rdf:about="http://xodx.dssn.org/follows">
     <rdf:type rdf:resource="http://purl.org/linked-data/cube#MeasureProperty"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://xodx.dssn.org/follower">
-    <rdfs:label xml:lang="en">number of followers</rdfs:label>
+  <rdf:Description rdf:about="http://xodx.dssn.org/follows">
+    <rdfs:label xml:lang="en">xodx Agent whom the user follows</rdfs:label>
   </rdf:Description>
-  <rdf:Description rdf:about="http://xodx.dssn.org/follower">
+  <rdf:Description rdf:about="http://xodx.dssn.org/follows">
     <rdfs:subPropertyOf rdf:resource="http://purl.org/linked-data/sdmx/2009/measure#obsValue"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://xodx.dssn.org/receivedMessages">
@@ -454,18 +388,6 @@
     <rdfs:label xml:lang="en">number of triples</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://xodx.dssn.org/triples">
-    <rdfs:subPropertyOf rdf:resource="http://purl.org/linked-data/sdmx/2009/measure#obsValue"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://xodx.dssn.org/size">
-    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://xodx.dssn.org/size">
-    <rdf:type rdf:resource="http://purl.org/linked-data/cube#MeasureProperty"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://xodx.dssn.org/size">
-    <rdfs:label xml:lang="en">size of the triple store</rdfs:label>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://xodx.dssn.org/size">
     <rdfs:subPropertyOf rdf:resource="http://purl.org/linked-data/sdmx/2009/measure#obsValue"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://xodx.dssn.org/Access">

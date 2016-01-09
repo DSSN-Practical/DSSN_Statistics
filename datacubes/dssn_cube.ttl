@@ -3,9 +3,8 @@
 #---for reference, look http://www.w3.org/TR/vocab-data-cube/
 #---structure:
 #------DataSets:
-#--------followers[number]
+#--------follows[Agent]
 #--------messages[number]: in+out
-#--------triplestore size[number/kbyte]: triples+total
 #--------access time[microseconds]: measured value
 #------Dimensions:
 #--------agent id, simulation runtime
@@ -41,14 +40,13 @@
 @prefix xo:	       <http://xodx.dssn.org/>.
 
 # -- Data Sets --------------------------------------------
-xo:dataset-xoFollower a qb:DataSet;
-#--xo dataset for follower
-    dct:title       "Follower"@en;
-    rdfs:comment    "Number of followers of one dssn node"@en;
+xo:dataset-xoFollowers a qb:DataSet;
+#--xo dataset for followers
+    dct:title       "followers"@en;
+    rdfs:comment    "Number of followers of one dssn user"@en;
     dct:publisher   xo:team-dssnpWiSe2014 ;
     dct:issued      "2014-02-01"^^xsd:date;
-    qb:structure xo:dsd-xoFollower ;
-    sdmx-attribute:unitMeasure xsd:integer
+    qb:structure xo:dsd-xoFollowers
     .
 
 xo:dataset-xoOUT a qb:DataSet;
@@ -80,18 +78,9 @@ xo:dataset-xoTriples a qb:DataSet;
     sdmx-attribute:unitMeasure xsd:integer
     .
 
-xo:dataset-xoSize a qb:DataSet;
-#--xo dataset for virtuoso size
-    dct:title       "Size"@en;
-    rdfs:comment    "size of the virtuoso store of one dssn node"@en;
-    dct:publisher   xo:team-dssnpWiSe2014 ;
-    dct:issued      "2014-02-01"^^xsd:date;
-    qb:structure xo:dsd-xoSize ;
-    sdmx-attribute:unitMeasure dbpedia:Kbyte
-    .
 
 xo:dataset-xoAccess a qb:DataSet;
-#--xo dataset for virtuoso size
+#--xo dataset for virtuoso access time
     dct:title       "Access time"@en;
     rdfs:comment    "Time needed for one agent to view his current timeline"@en;
     dct:publisher   xo:team ;
@@ -107,14 +96,14 @@ xo:team a org:Organization;
 # -- Data structure definitions----------------------------
 
 # pro messgröße eine DataStructureDefinition
-xo:dsd-xoFollower a qb:DataStructureDefinition;
+xo:dsd-xoFollowers a qb:DataStructureDefinition;
     qb:component
     # The dimensions
         [ qb:dimension xo:refAgent;      qb:order 1 ],
         [ qb:dimension xo:refTime;       qb:order 2; qb:componentAttachment qb:Slice ];
 
     # The measure(s)
-    qb:component [ qb:measure xo:follower];
+    qb:component [ qb:measure xo:follows];
 
     # The attributes
     qb:component [ qb:attribute sdmx-attribute:unitMeasure;
@@ -167,20 +156,6 @@ xo:dsd-xoTriples a qb:DataStructureDefinition;
                    qb:componentAttachment qb:DataSet; ]
     .
 
-xo:dsd-xoSize a qb:DataStructureDefinition;
-    qb:component
-    # The dimensions
-        [ qb:dimension xo:refAgent;        qb:order 1 ],
-        [ qb:dimension xo:refTime;       qb:order 2; qb:componentAttachment qb:Slice ];
-
-    # The measure(s)
-    qb:component [ qb:measure xo:size];
-
-    # The attributes
-    qb:component [ qb:attribute sdmx-attribute:unitMeasure;
-                   qb:componentRequired "true"^^xsd:boolean;
-                   qb:componentAttachment qb:DataSet; ]
-    .
 
 xo:dsd-xoAccess a qb:DataStructureDefinition;
     qb:component
@@ -214,8 +189,8 @@ xo:outgoingMessages  a rdf:Property, qb:MeasureProperty;
     rdfs:subPropertyOf sdmx-measure:obsValue;
     .
 
-xo:follower a rdf:Property, qb:MeasureProperty;
-    rdfs:label "number of followers"@en;
+xo:follows a rdf:Property, qb:MeasureProperty;
+    rdfs:label "xodx Agent whom the user follows"@en;
     rdfs:subPropertyOf sdmx-measure:obsValue;
     .
 
@@ -229,10 +204,6 @@ xo:triples a rdf:Property, qb:MeasureProperty;
     rdfs:subPropertyOf sdmx-measure:obsValue;
     .
 
-xo:size a rdf:Property, qb:MeasureProperty;
-    rdfs:label "size of the triple store"@en;
-    rdfs:subPropertyOf sdmx-measure:obsValue;
-    .
 
 xo:Access a rdf:Property, qb:MeasureProperty;
     rdfs:label "Access time on timeline"@en;

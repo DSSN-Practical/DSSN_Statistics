@@ -1,0 +1,2 @@
+@prefix xo:	       <http://xodx.dssn.org/>.
+@prefix qb:       <http://purl.org/linked-data/cube#> .

@@ -1,0 +1,20 @@
+PREFIX qb:<http://purl.org/linked-data/cube#>
+PREFIX xo:<http://xodx.dssn.org/>
+SELECT ?timeStamp  ?agent ?follower ?messagesSent
+WHERE {
+    ?observation2 xo:refTime ?timeStamp;
+        xo:refAgent ?agent;
+        xo:outgoingMessages ?messagesSent.
+
+     {
+        SELECT ?timeStamp ?agent (COUNT(?userPerson) as $follower)
+        WHERE {
+            ?observation1 xo:refTime ?timeStamp;
+                xo:refAgent ?userPerson;
+                xo:follows ?agent.
+        }
+        GROUP BY ?timeStamp ?agent
+     }
+}
+GROUP BY ?timeStamp ?agent ?messagesSent ?follower
+ORDER BY ?timeStamp
