@@ -1,4 +1,17 @@
-.classpath
-.project
+#Java
+*.classpath
+*.project
 test.*
 *~
+
+observations/*
+
+#LaTeX files
+doc/Seminararbeit/recherche/*
+*.aux
+*.bbl
+*.blg
+*.log
+*.synctex.gz
+*.toc
+main.pdf
