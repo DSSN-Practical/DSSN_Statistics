@@ -61,16 +61,16 @@ In diesem Kapitel sollen die Technologien vorgestellt werden, welche im praktisc
 
 \section{Vorarbeit}
 
-Wie bereits in Kapitel 1 beschrieben, sollte die Arbeit auf der des Studententeams aus dem vergangenen Wintersemester aufsetzen und diese fortführen. Im letzten Jahr waren es 5, später 3 Studenten, welche an der Umsetzung einer Simulation für xodx arbeiteten. Die Arbeit gliederte sich in drei Teile.
+Wie bereits in Kapitel 1 beschrieben, sollte die Arbeit auf der des Studententeams aus dem vergangenen Wintersemester aufsetzen und diese fortführen. Im letzten Jahr waren es 5, später 3 Studenten, welche an der Umsetzung einer Simulation für xodx arbeiteten. Die Arbeit umfasste drei Bereiche.
 \begin{enumerate}
 	\item{Entwicklung einer Test-Infrastruktur\\
-	Unter Verwendung der Docker-Technologie sollten Container erstellt werden, auf welchen die xodx-Software inklusive Virtuoso-Backend läuft und welche untereinander auf getrennten Ports kommunizieren können.}
+	Es sollten virtuelle Container erstellt werden, auf welchen die xodx-Software inklusive Virtuoso Backend läuft und welche untereinander auf getrennten Ports kommunizieren können. Zur Umsetzung dieser Aufgabe wurde Docker\footnote{Docker}gewählt.}
 	\item{Generierung von Testdaten\\
-	Um eine möglichst realitätsgetreue Simulation zu erreichen, sollte über die Twitter-API ein Korpus extrahiert und über Transformationen in eine mit Zeitstempel versehene Liste von Aktionen im sozialen Netzwerk generiert werden.}
+	Um eine möglichst realitätsgetreue Simulation zu erreichen, sollte ein Korpus aus Realdaten extrahiert und über Transformationen in eine mit Zeitstempel versehene Liste von Aktionen im sozialen Netzwerk generiert werden. Dazu wurde in Python eine App entwickelt, die über die Twitter-Api verschiedene, untereinander vernetzte Timelines extrahiert und nach XML parst.}
 	\item{Planung einer Statistikkomponente\\
-	Es sollte eine mögliche Umsetzung einer Statistikkomponente  recherchiert werden, um mit dieser die Software auf vorher festgelegte Fehlerklassen zu überprüfen.}
+	Es sollte eine mögliche Umsetzung einer Statistikkomponente  recherchiert werden, um mit dieser die Software auf vorher festgelegte Fehlerklassen zu überprüfen. Als Fehlerklassen wurden Dateneffizienz, verlorene Nachrichten und Zugriffsgeschwindigkeit auf die eigene Zeitleiste festgestellt und es sollte mithilfe der Simulationssoftware ermöglicht werden, auf Unregelmäßigkeiten in diesen Gebieten zu prüfen. Die Speicherung der Daten dieser Erhebung soll ebenfalls innerhalb des Paradigma des Semantic Web erfolgen und es wurde das DataCube-Vokabular evaluiert sowie ein DataCube angelegt, der zur Speicherung der Daten verwendet werden soll. Es sollte das vom Lehrstuhl entwickelte Tool CubeViz\footnote{CubeViz} verwendet werden, um die Daten graphisch auszuwerten.}
 \end{enumerate}
-asdf
+Mit dieser Arbeit war es möglich, dem eigentlichen Simulationsversuch näher zu kommen, auch wenn dieser aufgrund der geringen Teamgröße nicht umgesetzt werden konnte. Hier wurde im Wintersemester 2015 erneut angesetzt mit dem Ziel, alle bereits vorhandenen Komponenten zu verbinden. Dazu wurde ein Replay-Agent benötigt, welcher es ermöglicht, auf der laufenden Docker-Infrastruktur den vorhandenen Twitterkorpus ,,abzuspielen''. Zusätzlich dazu musste ein Statistikkontroller als Verbindung zwischen der Live-Instanz eines Agenten und den im DataCube hinterlegten Beobachtungen entwickelt werden. Mit letzterer Aufgabe habe ich mich beschäftigt. Dabei ist mir aufgefallen, dass der im vergangenen Jahr erstellte DataCube bewusst von der aktuellsten Empfehlung des W3C abweicht, um besser mit CubeViz zu harmonieren. Mit der Neuentwicklung von CubeViz und anderen Möglichkeiten der Auswertung (siehe Kapitel 5) ist diese Abweichung nicht mehr notwendig und ich habe den DataCube geupdatet.
 
 - letztes Jahr: Studententeam 5, später 3
 - Docker-Krams?
