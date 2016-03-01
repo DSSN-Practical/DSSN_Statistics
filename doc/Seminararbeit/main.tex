@@ -68,11 +68,17 @@ Wie bereits in Kapitel 1 beschrieben, sollte die Arbeit auf der des Studententea
 	Es sollte eine mögliche Umsetzung einer Statistikkomponente  recherchiert werden, um mit dieser die Software auf vorher festgelegte Fehlerklassen zu überprüfen. Als Fehlerklassen wurden Dateneffizienz, verlorene Nachrichten und Zugriffsgeschwindigkeit auf die eigene Zeitleiste festgestellt und es sollte mithilfe der Simulationssoftware ermöglicht werden, auf Unregelmäßigkeiten in diesen Gebieten zu prüfen. Die Speicherung der Daten dieser Erhebung soll ebenfalls innerhalb des Paradigma des Semantic Web erfolgen und es wurde das DataCube-Vokabular evaluiert sowie ein DataCube angelegt, der zur Speicherung der Daten verwendet werden soll. Es sollte das vom Lehrstuhl entwickelte Tool CubeViz\footnote{CubeViz} verwendet werden, um die Daten graphisch auszuwerten.}
 \end{enumerate}
 Mit dieser Arbeit war es möglich, dem eigentlichen Simulationsversuch näher zu kommen, auch wenn dieser aufgrund der geringen Teamgröße nicht umgesetzt werden konnte. Hier wurde im Wintersemester 2015 erneut angesetzt mit dem Ziel, alle bereits vorhandenen Komponenten zu verbinden. Dazu wurde ein Replay-Agent benötigt, welcher es ermöglicht, auf der laufenden Docker-Infrastruktur den vorhandenen Twitterkorpus ,,abzuspielen''.\\
- Zusätzlich dazu musste ein Statistikkontroller als Verbindung zwischen der Live-Instanz eines Agenten und den im DataCube hinterlegten Beobachtungen entwickelt werden. Mit letzterer Aufgabe habe ich mich beschäftigt. Dabei ist mir aufgefallen, dass der im vergangenen Jahr erstellte DataCube bewusst von der aktuellsten Empfehlung des W3C abweicht, um besser mit CubeViz zu harmonieren. Mit der Neuentwicklung von CubeViz und anderen Möglichkeiten der Auswertung (siehe Kapitel 6) ist diese Abweichung nicht mehr notwendig und der DataCube konnte auf die aktuelle Version geupdatet werden.
+ Zusätzlich dazu musste ein Statistikkontroller als Verbindung zwischen der Live-Instanz eines Agenten und den im DataCube hinterlegten Beobachtungen entwickelt werden. Mit letzterer Aufgabe habe ich mich beschäftigt. Dabei ist mir aufgefallen, dass der im vergangenen Jahr erstellte DataCube bewusst von der aktuellsten Empfehlung des W3C abweicht, um besser mit CubeViz zu harmonieren. Mit der Neuentwicklung von CubeViz und anderen Möglichkeiten der Auswertung (siehe Kapitel 6) ist diese Anpassung nicht mehr notwendig und der DataCube konnte auf die aktuelle Version des Vokabulars geupdatet werden.
 
-\section{Struktur des DataCube}
+\section{Struktur des DataCubes}
 
-%gegenüberstellung der Fehlerklassen und Messgrößen
+Der DataCube für die Speicherung und Auswertung der Messwerte umfasst 5 Datasets, also 5 Messgrößen. Diese sind in Tabelle 1 den drei im letzten Jahr herausgearbeiteten Fehlerklassen gegenübergestellt.\\
+Jede Messung, also jede Observation benötigt einen eindeutigen Bezeichner und ist genau einem Dataset zugeordnet. Sie umfasst stets die folgenden drei Dimensionen:
+\begin{itemize}
+	\item{\texttt{xo:refAgent} als Referenz zum Agenten, auf dem sie gemessen wurde}
+	\item{\texttt{xo:refTime} als Referenz zum Zeitpunkt der Messung}
+	\item{der Messwert in der Dimension der Messgröße, z.B. \texttt{xo:follower}}
+\end{itemize}
 %Verweis Beispiel-Observations
 
 \section{Architektur des Statistikkontrollers}
@@ -90,6 +96,7 @@ Er untergliedert sich in bb
 - am Datenflussdiagramm?
 - zur Auswertung gehört 
 1. Überprüfung des Datacube auf Validität
+	%Prüfung auf Kollisionen in den Bezeichnern. Zufällig generiert, daher nicht prinzipiell auszuschließen
 2. Auswertung nach Gesichtspunkten
 2.1. Verlorene Nachrichten
 

@@ -1,27 +1,5 @@
-#---general prefixes
-@prefix rdf:      <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix rdfs:     <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix owl:      <http://www.w3.org/2002/07/owl#> .
-@prefix xsd:      <http://www.w3.org/2001/XMLSchema#> .
-@prefix dbpedia:  <http://dbpedia.org/resource#>.
-@prefix skos:     <http://www.w3.org/2004/02/skos/core#> .
-@prefix void:     <http://rdfs.org/ns/void#> .
-@prefix dct:      <http://purl.org/dc/terms/> .
-@prefix foaf:     <http://xmlns.com/foaf/0.1/> .
-@prefix org:      <http://www.w3.org/ns/org#> .
-@prefix interval: <http://reference.data.gov.uk/def/intervals/> .
-
 #---datacube prefix
 @prefix qb:       <http://purl.org/linked-data/cube#> .
-
-#---sdmx statistics prefix
-@prefix sdmx-concept:    <http://purl.org/linked-data/sdmx/2009/concept#> .
-@prefix sdmx-dimension:  <http://purl.org/linked-data/sdmx/2009/dimension#> .
-@prefix sdmx-attribute:  <http://purl.org/linked-data/sdmx/2009/attribute#> .
-@prefix sdmx-measure:    <http://purl.org/linked-data/sdmx/2009/measure#> .
-@prefix sdmx-metadata:   <http://purl.org/linked-data/sdmx/2009/metadata#> .
-@prefix sdmx-code:       <http://purl.org/linked-data/sdmx/2009/code#> .
-@prefix sdmx-subject:    <http://purl.org/linked-data/sdmx/2009/subject#> .
 
 #---our dssn prefix
 @prefix xo:	       <http://xodx.dssn.org/>.
@@ -101,5 +79,4 @@ xo:o24 a qb:Observation;
     xo:refTime  2 ;                  
     xo:receivedMessages 9 ;
     .
-#todo: triples, size, access
 
