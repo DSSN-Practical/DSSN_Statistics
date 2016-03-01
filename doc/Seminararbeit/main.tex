@@ -23,11 +23,7 @@
 
 \section{Einleitung und Aufgabenstellung}
 
-
-% im diesjährigen DSSN-Praktikum im Rahmen des Seminares angewandte semantische Technologien sollte im unabhängigen Studententeam
-%Aufgaben bearbeitet werden
-Das diesjährige DSSN-Praktikum (xodx) war in das Seminar ,,Anwendung Semantischer Technologien'' am Lehrstuhl für betriebliche Informationssysteme eingebettet und umfasste verschiedene praktische Aufgabenkomplexe,
-die in einem unabhängigen Studententeam bearbeitet wurden.\\
+Das diesjährige DSSN-Praktikum (xodx) war in das Seminar ,,Anwendung Se-mantischer Technologien'' am Lehrstuhl für betriebliche Informationssysteme eingebettet und umfasste verschiedene praktische Aufgabenkomplexe, die von einem unabhängigen Studententeam bearbeitet wurden.\\
 Die Aufgaben drehten sich darum, einen Test für die bestehende xodx-Software zu entwerfen und eine agentenbasierende Simulationssoftware als Testumgebung nach einem Komponentenmodell zu realisieren. Dabei sollte die Arbeit des Teams vom vorangegangenen Wintersemester fortgeführt werden.\\
 Meine Aufgabe war es, die Statistikkomponente als zentrales Verbindungsstück zwischen der xodx-Software bzw. deren Agenten und der Simulationskontrolleinheit zu entwerfen und zu implementieren. Die Ergebnisse dieser Arbeit sollen hier übersichtlich dargestellt werden.\\
 Dazu soll zunächst kurz die thematische Recherche zum Thema Anwendung Semantischer Technologien dargestellt werden, um einen Einblick in die Designentscheidungen zu geben. Danach soll die Vorarbeit aus dem letzten Jahr zusammengefasst werden, um anschließend genauer auf den entwickelten Statistikkontroller einzugehen und die Architektur zu umreißen. Anschließend sollen der Arbeitsablauf für die Simulation sowie der anschließende Auswertungsprozess erläutert werden und in der Zusammenfassung eine abschließende Darstellung der erreichten und der noch offenen Zielstellungen gegeben werden.\\
@@ -64,26 +60,21 @@ In diesem Kapitel sollen die Technologien vorgestellt werden, welche im praktisc
 Wie bereits in Kapitel 1 beschrieben, sollte die Arbeit auf der des Studententeams aus dem vergangenen Wintersemester aufsetzen und diese fortführen. Im letzten Jahr waren es 5, später 3 Studenten, welche an der Umsetzung einer Simulation für xodx arbeiteten. Die Arbeit umfasste drei Bereiche.
 \begin{enumerate}
 	\item{Entwicklung einer Test-Infrastruktur\\
-	Es sollten virtuelle Container erstellt werden, auf welchen die xodx-Software inklusive Virtuoso Backend läuft und welche untereinander auf getrennten Ports kommunizieren können. Zur Umsetzung dieser Aufgabe wurde Docker\footnote{Docker}gewählt.}
+	Es sollten virtuelle Container erstellt werden, auf welchen die xodx-Soft-ware inklusive Virtuoso Backend läuft und welche untereinander auf getrennten Ports kommunizieren können. Zur Umsetzung dieser Aufgabe wurde Docker\footnote{Docker}gewählt.}
 	\item{Generierung von Testdaten\\
 	Um eine möglichst realitätsgetreue Simulation zu erreichen, sollte ein Korpus aus Realdaten extrahiert und über Transformationen in eine mit Zeitstempel versehene Liste von Aktionen im sozialen Netzwerk generiert werden. Dazu wurde in Python eine App entwickelt, die über die Twitter-Api verschiedene, untereinander vernetzte Timelines extrahiert und nach XML parst.}
 	\item{Planung einer Statistikkomponente\\
 	Es sollte eine mögliche Umsetzung einer Statistikkomponente  recherchiert werden, um mit dieser die Software auf vorher festgelegte Fehlerklassen zu überprüfen. Als Fehlerklassen wurden Dateneffizienz, verlorene Nachrichten und Zugriffsgeschwindigkeit auf die eigene Zeitleiste festgestellt und es sollte mithilfe der Simulationssoftware ermöglicht werden, auf Unregelmäßigkeiten in diesen Gebieten zu prüfen. Die Speicherung der Daten dieser Erhebung soll ebenfalls innerhalb des Paradigma des Semantic Web erfolgen und es wurde das DataCube-Vokabular evaluiert sowie ein DataCube angelegt, der zur Speicherung der Daten verwendet werden soll. Es sollte das vom Lehrstuhl entwickelte Tool CubeViz\footnote{CubeViz} verwendet werden, um die Daten graphisch auszuwerten.}
 \end{enumerate}
-Mit dieser Arbeit war es möglich, dem eigentlichen Simulationsversuch näher zu kommen, auch wenn dieser aufgrund der geringen Teamgröße nicht umgesetzt werden konnte. Hier wurde im Wintersemester 2015 erneut angesetzt mit dem Ziel, alle bereits vorhandenen Komponenten zu verbinden. Dazu wurde ein Replay-Agent benötigt, welcher es ermöglicht, auf der laufenden Docker-Infrastruktur den vorhandenen Twitterkorpus ,,abzuspielen''. Zusätzlich dazu musste ein Statistikkontroller als Verbindung zwischen der Live-Instanz eines Agenten und den im DataCube hinterlegten Beobachtungen entwickelt werden. Mit letzterer Aufgabe habe ich mich beschäftigt. Dabei ist mir aufgefallen, dass der im vergangenen Jahr erstellte DataCube bewusst von der aktuellsten Empfehlung des W3C abweicht, um besser mit CubeViz zu harmonieren. Mit der Neuentwicklung von CubeViz und anderen Möglichkeiten der Auswertung (siehe Kapitel 5) ist diese Abweichung nicht mehr notwendig und ich habe den DataCube geupdatet.
-
-- letztes Jahr: Studententeam 5, später 3
-- Docker-Krams?
-- Twitter Korpus
-- Planung der Statistikkomponente:
-	- Feststellung von drei Fehlerklassen
-	- Entwurf eines Datacube
-- dieser Datacube wurde geupdatet auf W3C blah
-
+Mit dieser Arbeit war es möglich, dem eigentlichen Simulationsversuch näher zu kommen, auch wenn dieser aufgrund der geringen Teamgröße nicht umgesetzt werden konnte. Hier wurde im Wintersemester 2015 erneut angesetzt mit dem Ziel, alle bereits vorhandenen Komponenten zu verbinden. Dazu wurde ein Replay-Agent benötigt, welcher es ermöglicht, auf der laufenden Docker-Infrastruktur den vorhandenen Twitterkorpus ,,abzuspielen''. Zusätzlich dazu musste ein Statistikkontroller als Verbindung zwischen der Live-Instanz eines Agenten und den im DataCube hinterlegten Beobachtungen entwickelt werden. Mit letzterer Aufgabe habe ich mich beschäftigt. Dabei ist mir aufgefallen, dass der im vergangenen Jahr erstellte DataCube bewusst von der aktuellsten Empfehlung des W3C abweicht, um besser mit CubeViz zu harmonieren. Mit der Neuentwicklung von CubeViz und anderen Möglichkeiten der Auswertung (siehe Kapitel 5) ist diese Abweichung nicht mehr notwendig und der DataCube konnte auf die aktuelle Version geupdatet werden.
 
 \section{Architektur des Statistikkontrollers}
+Der Statistikkontroller ist in php5 implementiert und folgt dem von Zend verwendeten Architekturmodell MVC. Er stellt einen zusätzlichen Controller dar, der über den bootstrapping-Prozess von xodx zur Verfügung gestellt wird und dessen Messergebnis ohne xodx-Layout direkt über die URL bzw. mit einem http-request abfragbar ist.\\
 
-- nach Zend
+%show http-request here
+
+
+
 - public
 - private
 - Verwendung xodx Model
