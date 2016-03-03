@@ -7,7 +7,7 @@
 \usepackage{graphicx}
 \usepackage{url}
 
-\title{Praktikumsarbeit DSSN WS 2014: \\ Statistik der Xodx-Simulation}
+\title{Praktikumsarbeit DSSN WS 2014: \\ Statistik der xodx-Simulation}
 \author{Franz Teichmann}
 \date{\today}
 
@@ -21,33 +21,33 @@
 
 \section{Einleitung und Aufgabenstellung}
 
-Das diesjährige DSSN-Praktikum (xodx) war in das Seminar ,,Anwendung Se-mantischer Technologien'' am Lehrstuhl für betriebliche Informationssysteme eingebettet und umfasste verschiedene praktische Aufgabenkomplexe, die von einem unabhängigen Studententeam bearbeitet wurden.\\
-Die Aufgaben drehten sich darum, einen Test für die bestehende xodx-Software zu entwerfen und eine agentenbasierende Simulationssoftware als Testumgebung nach einem Komponentenmodell zu realisieren. Dabei sollte die Arbeit des Teams vom vorangegangenen Wintersemester fortgeführt werden.\\
+Das diesjährige DSSN Praktikum (xodx) war in das Seminar ,,Anwendung Se-mantischer Technologien'' am Lehrstuhl für betriebliche Informationssysteme eingebettet und umfasste verschiedene praktische Aufgabenkomplexe, die von einem unabhängigen Studententeam bearbeitet wurden.\\
+Die Aufgaben drehten sich darum, einen Test für die bestehende xodx-Software zu entwerfen und eine auf Agenten basierende Simulationssoftware als Testumgebung nach einem Komponentenmodell zu realisieren. Dabei sollte die Arbeit des Teams vom vorangegangenen Wintersemester fortgeführt werden.\\
 Meine Aufgabe war es, die Statistikkomponente als zentrales Verbindungsstück zwischen der xodx-Software bzw. deren Agenten und der Simulationskontrolleinheit zu entwerfen und zu implementieren. Die Ergebnisse dieser Arbeit sollen hier übersichtlich dargestellt werden.\\
 Dazu soll zunächst kurz die thematische Recherche zum Thema Anwendung Semantischer Technologien dargestellt werden, um einen Einblick in die Designentscheidungen zu geben. Danach soll die Vorarbeit aus dem letzten Jahr zusammengefasst werden, um anschließend genauer auf den entwickelten Statistik Controller einzugehen und die Architektur zu umreißen. Anschließend sollen der Arbeitsablauf für die Simulation sowie der anschließende Auswertungsprozess erläutert werden und in der Zusammenfassung eine abschließende Darstellung der erreichten und der noch offenen Zielstellungen gegeben werden.\\
 Alle Dateien sowie dieses Dokument und weitere Dokumentation sind auf Git-hub\footnote{\url{https://github.com/DSSN-Practical/DSSN_Statistics}} zu finden.
 
 \section{Recherche}
 
-In diesem Kapitel sollen die Technologien vorgestellt werden, welche im praktischen Teil der Arbeit Verwendung fanden. Es handelt sich dabei um relativ umfangreiche Recherchethemen mit vielen verschiedenen Aspekten, welche unter Anderem in der Vorlesung "Semantic Web" am Lehrstuhl behandelt wurden, weshalb an dieser Stelle nur die für das Praktikum relevantesten Aspekte dargestellt werden sollen.
+In diesem Kapitel sollen die Technologien vorgestellt werden, welche im praktischen Teil der Arbeit Verwendung fanden. Es handelt sich dabei um relativ umfangreiche Recherchethemen mit vielen verschiedenen Aspekten, welche unter Anderem in der Vorlesung "Semantic Web" am Lehrstuhl behandelt wurden, weshalb an dieser Stelle nur die für das Praktikum relevanten Aspekte dargestellt werden sollen.
 
 
 \subsection{Semantic Web}
 
 Das Semantic Web ist eine vom W3C\footnote{W3C: Das World Wide Web Consortium ist die größte und bedeutendste internationale Organisation zur Standardisierung des Web bzw. von Web-Technologien.\\ \url{https://www.w3.org/} } vorangetriebene Erweiterung des Web mit dem Ziel, zusätzliche Daten und verbesserte maschinelle Erschließung der Inhalte zu erreichen.\\
 
-Es werden dabei hoch strukturierte Daten, z.B. in Form von RDF\footnote{RDF: Resource Description Framework, \url{https://www.w3.org/RDF/}, ein Datenformat, in welchem Aussagen in Form von Tripeln formuliert sind und dem Linked Data Prinzip (\url{https://www.w3.org/standards/semanticweb/data}) folgen. Werden mehrere Graphen vernetzt, spricht man von Quadrupeln.}, im Gegensatz zu unstrukturierten bzw. semi-strukturierten Datenbeständen in Form von HTML verwendet. Diese und weitere Schlüsseltechnologien wie RDFs und OWL ermöglichen den Aufbau großer Wissensbasen, auch Ontologien genannt, welche die Daten in Form eines stark vernetzten Graphen verfügbar machen und so durch Maschinen eine semantische Suche innerhalb dieser Daten ermöglicht wird.\\
+Es werden dabei hoch strukturierte Daten, z.B. in Form von RDF\footnote{RDF: Resource Description Framework, \url{https://www.w3.org/RDF/}, ein Datenformat, in welchem Aussagen in Form von Tripeln formuliert sind und dem Linked Data Prinzip (\url{https://www.w3.org/standards/semanticweb/data}) folgen. Werden mehrere Graphen vernetzt, spricht man von Quadrupeln.}, im Gegensatz zu unstrukturierten bzw. semistrukturierten Datenbeständen in Form von HTML verwendet. Diese und weitere Schlüsseltechnologien wie RDFs und OWL ermöglichen den Aufbau großer Wissensbasen, auch Ontologien genannt, welche die Daten in Form eines stark vernetzten Graphen verfügbar machen und so durch Maschinen eine semantische Suche innerhalb dieser Daten ermöglicht wird.\\
 Das Semantic Web umfasst einen sehr großen Technologiestack, von dem für den praktischen Teil der Arbeit vor allem die mit Datenbanken vergleichbare Technologie der Triplestores eine wichtige Rolle spielte.
 
 \subsection{Triplestores}
 
-Wie bereits erwähnt, sind Triplestores im Semantic Web mit Datenbanken vergleichbar. Sie sind in der Lage, sehr große RDF-Graphen zu speichern und über die Abfragesprache Sparql\footnote{Sparql: \url{https://www.w3.org/TR/sparql11-overview/}} Suche und Editierfunktionen bereitzustellen. Sie sind speziell darauf spezialisiert, mit großen Graphen in Triple- bzw. Quadrupel Form umzugehen.\\
+Wie bereits erwähnt, sind Triplestores im Semantic Web mit Datenbanken vergleichbar. Sie sind in der Lage, sehr große RDF Graphen zu speichern und über die Abfragesprache Sparql\footnote{Sparql: \url{https://www.w3.org/TR/sparql11-overview/}} Suche und Editierfunktionen bereitzustellen. Sie sind speziell darauf spezialisiert, mit großen Graphen in Triple- bzw. Quadrupel Form umzugehen.\\
 Während des Praktikums habe ich mit zwei sehr gegensätzlichen Umsetzungen dieses Prinzips gearbeitet. Einmal arbeitete ich mit Openlink Virtuoso\footnote{Virtuoso: \url{http://virtuoso.openlinksw.com/dataspace/doc/dav/wiki/Main}}, einer sehr mächtigen Datenbanksoftware, welche über das Semantic Web hinaus Anwendung findet. Dieser lässt sich neben einem lokalen Webserver installieren und ermöglicht, z.B. über ODBC eine Schnittstelle zu PHP.\\
 Des Weiteren arbeitete ich mit Apache Jena\footnote{Apache Jena: \url{https://jena.apache.org/}}, einem Framework für Java, welches unter anderem die schnelle Entwicklung von leichtgewichtigen Semantic Web Applikationen ermöglicht. Dieses arbeitet im Gegensatz zu Virtuoso nicht mit einer dedizierten Datenbank, sondern lädt das Datenmodell in den Arbeitsspeicher und ermöglicht dort die Bearbeitung mit Sparql. Diese Technologie wird auch in-memory Store genannt.
 
 \subsection{Datacube-Vokabular}
 
-Das DataCube Vokabular ist das bekannteste und meistverwendete Statistikvokabular für das Semantic Web. Es hat den Status einer W3C Empfehlung\cite{datacube} und zielt darauf ab, unter Einhaltung des RDF-Standards die Publikation von Statistiken im Netz zu vereinfachen. Es wurde für dieses Projekt ausgewählt, weil es gut in das Pradigma des DSSN passt und mit seiner Flexibilität und Erweiterbarkeit eine gute Grundlage für die Gruppenarbeit darstellt.\\
+Das DataCube Vokabular ist das bekannteste und meistverwendete Statistikvokabular für das Semantic Web. Es hat den Status einer W3C Empfehlung\cite{datacube} und zielt darauf ab, unter Einhaltung des RDF-Standards die Publikation von Statistiken im Netz zu vereinfachen. Es wurde für dieses Projekt ausgewählt, weil es gut in das Paradigma des DSSN passt und mit seiner Flexibilität und Erweiterbarkeit eine gute Grundlage für die Gruppenarbeit darstellt.\\
 Es baut dabei auf SDMX\footnote{SDMX: Statistical Data and Metadata Exchange \url{http://sdmx.org/}} auf, einem Standard für den Austausch von Statistischen Daten im Unternehmenskontext, welcher 2013 in den Status eines ISO Standards\cite{iso} gehoben wurde.\\
 Die grundlegende Idee ist es, potentiell höherdimensionale Daten wie sie in der Statistik vorkommen in einem ebenfalls mehrdimensionalen Würfel (Hypbercube) geordnet abzulegen, was durch RDF als Graph möglich ist. Die Struktur des Vokabulars ist in Abbildung 1 schematisch dargestellt.
 \begin{figure}[t]
@@ -58,7 +58,7 @@ Die grundlegende Idee ist es, potentiell höherdimensionale Daten wie sie in der
 \end{figure}\\
 So untergliedert sich ein DataCube in verschiedene DataSets, welche jeweils eine DataStructureDefinition besitzen, die die Komponenten des DataSets benennt. Diese Komponenten sind über die ComponentProperty entweder als Dimension, Attribut oder Measure (Messwert) definiert. Die ComponentPropertys besitzen ein direktes Mapping zu skos:Konzepten. Beschrieben wird der DataCube über Slices, also Dimensionale Schnitte, welche Observations als Platzhalter für tatsächlich beobachtete Werte enthalten. Solche Observations müssen genau einem DataSet zugeordnet sein und für jede der MeasureProperties einen Wert im Rahmen des Definitionsbereiches auszeichnen.\\
 Ein solcher DataCube kann in einem Triplestore gepflegt und über vernetzte Abfragen in Sparql können Sichten auf die darin enthaltene Statistik erzeugt werden (Betrachtung der Slices).
-\subsection{DSSN / Xodx}
+\subsection{DSSN / xodx}
 
 Soziale Netzwerke stellen eine der aktuellen Schlüsselanwendungen des Web dar. Aufgrund der schieren Zahl der Benutzer und der geteilten Daten stehen Netzwerke wie Facebook mitunter zu Recht in der Kritik von Datenschützern. Dies und die Erforschung der Möglichkeiten des Semantic Web sowie Erschließung neuer Anwendungsfelder führte zur Entwicklung von xodx\cite{xodx_paper} am Lehrstuhl.\\
 Es handelt sich dabei um eine Software für ein soziales Netzwerk, welches nach einem dezentralen, semantischen Paradigma erstellt wurde, kurz DSSN. Es nutzt für das Management seines dem Linked Data Prinzip folgenden Datenmodell die ebenfalls am Lehrstuhl entwickelten Semantic Web Frameworks Erfurt\footnote{Erfurt: \url{https://github.com/AKSW/Erfurt}} bzw. Saft\footnote{Saft: \url{https://safting.github.io/}} sowie Semantic Pingback\footnote{Semantic Pingback: \url{http://aksw.org/Projects/SemanticPingback.html}} als Kerntechnologie.\\
@@ -73,13 +73,13 @@ Bei Zend\footnote{Zend Framework: \url{http://framework.zend.com/}} handelt es s
 Wie bereits in Kapitel 1 beschrieben, sollte die Arbeit auf der des Studententeams aus dem vergangenen Wintersemester aufsetzen und diese fortführen. Im letzten Jahr waren es 5, später 3 Studenten, welche an der Umsetzung einer Simulation für xodx arbeiteten. Die Arbeit umfasste drei Bereiche.
 \begin{enumerate}
 	\item{Entwicklung einer Test-Infrastruktur\\
-	Es sollten virtuelle Container erstellt werden, auf welchen die xodx-Soft-ware inklusive Virtuoso Backend läuft und welche untereinander auf getrennten Ports kommunizieren können. Zur Umsetzung dieser Aufgabe wurde Docker\footnote{Docker: \url{https://www.docker.com/}}gewählt. Dabei wurde geplant, dass jeweils eine Instanz von Docker auch genau eine Instanz der xodx Software, also einen Knoten im DSSN, umfasst und auf dieser Instanz nur ein Account registriert ist, welcher vom virtuellen Agenten bedient wird.}
+	Es sollten virtuelle Container erstellt werden, auf welchen die xodx Soft-ware inklusive Virtuoso Backend läuft und welche untereinander auf getrennten Ports kommunizieren können. Zur Umsetzung dieser Aufgabe wurde Docker\footnote{Docker: \url{https://www.docker.com/}}gewählt. Dabei wurde geplant, dass jeweils eine Instanz von Docker auch genau eine Instanz der xodx Software, also einen Knoten im DSSN, umfasst und auf dieser Instanz nur ein Account registriert ist, welcher vom virtuellen Agenten bedient wird.}
 	\item{Generierung von Testdaten\\
 	Um eine möglichst realitätsgetreue Simulation zu erreichen, sollte ein Korpus aus Realdaten extrahiert und über Transformationen in eine mit Zeitstempel versehene Liste von Aktionen im sozialen Netzwerk generiert werden. Dazu wurde in Python eine App entwickelt, die über die Twitter-Api verschiedene, untereinander vernetzte Timelines extrahiert und nach XML parst.}
 	\item{Planung einer Statistikkomponente\\
 	Es sollte eine mögliche Umsetzung einer Statistikkomponente  recherchiert werden, um mit dieser die Software auf vorher festgelegte Fehlerklassen zu überprüfen. Als Fehlerklassen wurden Dateneffizienz, verlorene Nachrichten und Zugriffsgeschwindigkeit auf die eigene Zeitleiste festgestellt und es sollte mithilfe der Simulationssoftware ermöglicht werden, auf Unregelmäßigkeiten in diesen Gebieten zu prüfen. Die Speicherung der Daten dieser Erhebung soll ebenfalls innerhalb des Paradigma des Semantic Web erfolgen und es wurde das DataCube-Vokabular evaluiert sowie ein DataCube angelegt, der zur Speicherung der Daten verwendet werden soll. Es sollte das vom Lehrstuhl entwickelte Tool CubeViz\cite{cubeviz}\footnote{CubeViz Neuentwicklung: \url{https://github.com/AKSW/cubevizjs}} verwendet werden, um die Daten graphisch auszuwerten.}
 \end{enumerate}
-Mit dieser Arbeit war es möglich, dem eigentlichen Simulationsversuch näher zu kommen, auch wenn dieser aufgrund der geringen Teamgröße nicht umgesetzt werden konnte. Hier wurde im Wintersemester 2015 erneut angesetzt mit dem Ziel, alle bereits vorhandenen Komponenten zu verbinden. Dazu wurde ein Replay-Agent benötigt, welcher es ermöglicht, auf der laufenden Docker-Infrastruktur den vorhandenen Twitterkorpus ,,abzuspielen''.\\
+Mit dieser Arbeit war es möglich, dem eigentlichen Simulationsversuch näher zu kommen, auch wenn dieser aufgrund der geringen Teamgröße nicht umgesetzt werden konnte. Hier wurde im Wintersemester 2015 erneut angesetzt mit dem Ziel, alle bereits vorhandenen Komponenten zu verbinden. Dazu wurde ein Replay Agent benötigt, welcher es ermöglicht, auf der laufenden Docker-Infrastruktur den vorhandenen Korpus ,,abzuspielen''.\\
  Zusätzlich dazu musste ein Statistik Controller als Verbindung zwischen der Live-Instanz eines Agenten und den im DataCube hinterlegten Beobachtungen entwickelt werden. Mit letzterer Aufgabe habe ich mich beschäftigt. Dabei ist mir aufgefallen, dass der im vergangenen Jahr erstellte DataCube bewusst von der aktuellsten Empfehlung des W3C abweicht, um besser mit CubeViz zu harmonieren. Mit der Neuentwicklung von CubeViz und anderen Möglichkeiten der Auswertung (siehe Kapitel 6) ist diese Anpassung nicht mehr notwendig und der DataCube konnte auf die aktuelle Version des Vokabulars geupdatet werden.
 
 \section{Struktur des DataCube}
@@ -97,9 +97,9 @@ Dataset & Beschreibung \\ \hline
 \texttt{xo:dataset-xoTriples}        & Anzahl gespeicherter triple auf einem Knoten        	\\ \hline
 \texttt{xo:dataset-xoAccess}        & Zugriffszeit auf eigene Zeitleiste             		\\ \hline
 \end{tabular}
-\caption{DataSets im dssn DataCube}
+\caption{DataSets im DSSN DataCube}
 \end{table}\\
-Jedes dieser Datasets ist durch eine Data Structure Definition näher beschrieben. Hier werden die für die Umsetzung des Datasets benötigten Dimensionen angehängt. Sie sind in Tabelle 2 auf der Folgeseite aufgelistet. Zusätzlich nennt die Data Structure Definition auch die jeweilige Messgröße, welche im dssn DataCube für jedes Dataset eindeutig gewählt wurde.
+Jedes dieser Datasets ist durch eine Data Structure Definition näher beschrieben. Hier werden die für die Umsetzung des Datasets benötigten Dimensionen angehängt. Sie sind in Tabelle 2 auf der Folgeseite aufgelistet. Zusätzlich nennt die Data Structure Definition auch die jeweilige Messgröße, welche im DSSN DataCube für jedes DataSet eindeutig gewählt wurde.
 \begin{table}[t]
 \centering
 \label{table2}
@@ -109,7 +109,7 @@ Dimension & Beschreibung \\ \hline
 \texttt{xo:refAgent}       & Identifikationsnummer des Agenten            			\\ \hline
 \texttt{xo:refTime}        & Zeitpunkt der Messung, auch verwendet als Slice Key	\\ \hline
 \end{tabular}
-\caption{Dimensionen im dssn DataCube}
+\caption{Dimensionen im DSSN DataCube}
 \end{table}\\
 Jede Messung, also jede Observation, benötigt einen eindeutigen Bezeichner und ist genau einem Dataset zugeordnet. Sie umfasst stets zusätzlich zu den zwei Dimensionen aus Tabelle 2 den Messwert in der Dimension der Messgröße des Datasets. Es gibt im Repository dazu ein kurzes Beispiel\footnote{\url{https://github.com/DSSN-Practical/DSSN_Statistics/blob/master/observations/exampleObservations.ttl}}. In diesem sind Observations zu zwei Agenten enthalten, die sich gegenseitig folgen und zu zwei Zeitpunkten Nachrichten versenden, wobei zwischen Messzeitpunkt 1 und 2 eine Nachricht nicht korrekt übertragen wird.
 
@@ -173,7 +173,7 @@ Dieser besondere Agent besitzt auch den Datensatz des DataCube, dem in der Auswe
 \section{Zusammenfassung}
 
 Das Ziel des Praktikums war es, eine agentenbasierte Simulation als Belastungs- und funktionaler Test der xodx Software zu konzipieren, die dafür fehlenden Komponenten zu implementieren und die Simulation durchzuführen.\\
-Dafür gab es eine umfangreiche Vorarbeit aus dem letzten Wintersemester, welche Docker Container zum Aufbau der Versuchsinfrastruktur, einen Twitterkorpus mit Live-Daten für die Simulation sowie ein Konzept und einen DataCube für die Auswertung bzw. statistische Überwachung des Versuchsablaufes beinhaltete.\\
+Dafür gab es eine umfangreiche Vorarbeit aus dem letzten Wintersemester, welche Docker Container zum Aufbau der Versuchsinfrastruktur, einen Korpus mit Live-Daten für die Simulation sowie ein Konzept und einen DataCube für die Auswertung bzw. statistische Überwachung des Versuchsablaufes beinhaltete.\\
 Folglich bestanden die Aufgaben dieses Jahr darin, zum einen den Replay Agenten als Bindeglied zwischen der Docker/ xodx Instanz und dem Korpus und zum anderen einen Statistik Controller zum Messen und Sammeln der statistischen Kenngrößen zur Auswertung und Überwachung der Simulation zu implementieren.\\
 Diese Aufgaben übernahmen ein Kommilitone und ich, wobei er leider ab der zweiten Hälfte des Semesters das Praktikum aus Zeitgründen abbrechen musste. Aus diesem Grund war es uns nicht möglich, die Aufgaben bis zur Durchführung der eigentlichen Simulation zu lösen.\\
 Allerdings war die Umsetzung und der Test des Statistik Controllers auf einer lokalen Instanz von xodx mit einfachen Testdatensätzen erfolgreich und auch das Auswertungskonzept mit dem In-Memory Store von Apache Jena funktioniert und ist erweiterbar konzipiert.\\
