@@ -25,7 +25,7 @@ Das diesjährige DSSN-Praktikum (xodx) war in das Seminar ,,Anwendung Se-mantisc
 Die Aufgaben drehten sich darum, einen Test für die bestehende xodx-Software zu entwerfen und eine agentenbasierende Simulationssoftware als Testumgebung nach einem Komponentenmodell zu realisieren. Dabei sollte die Arbeit des Teams vom vorangegangenen Wintersemester fortgeführt werden.\\
 Meine Aufgabe war es, die Statistikkomponente als zentrales Verbindungsstück zwischen der xodx-Software bzw. deren Agenten und der Simulationskontrolleinheit zu entwerfen und zu implementieren. Die Ergebnisse dieser Arbeit sollen hier übersichtlich dargestellt werden.\\
 Dazu soll zunächst kurz die thematische Recherche zum Thema Anwendung Semantischer Technologien dargestellt werden, um einen Einblick in die Designentscheidungen zu geben. Danach soll die Vorarbeit aus dem letzten Jahr zusammengefasst werden, um anschließend genauer auf den entwickelten Statistik Controller einzugehen und die Architektur zu umreißen. Anschließend sollen der Arbeitsablauf für die Simulation sowie der anschließende Auswertungsprozess erläutert werden und in der Zusammenfassung eine abschließende Darstellung der erreichten und der noch offenen Zielstellungen gegeben werden.\\
-Alle Dateien sowie dieses Dokument und weitere Dokumentation sind auf Github\footnote{\url{https://github.com/DSSN-Practical/DSSN_Statistics}} zu finden.
+Alle Dateien sowie dieses Dokument und weitere Dokumentation sind auf Git-hub\footnote{\url{https://github.com/DSSN-Practical/DSSN_Statistics}} zu finden.
 
 \section{Recherche}
 
@@ -85,14 +85,14 @@ Mit dieser Arbeit war es möglich, dem eigentlichen Simulationsversuch näher zu
 \section{Struktur des DataCube}
 
 Der DataCube für die Speicherung und Auswertung der Messwerte umfasst 5 Datasets, also 5 Messgrößen. Diese sind in Tabelle 1 aufgeführt. Der Zusammenhang zwischen dieser Struktur, der Simulationsdurchführung und den notwendigen Berechnungen zur Evaluation der genannten Fehlerklassen soll in Kapitel 6 beschrieben werden.\\
-\begin{table}[h]
+\begin{table}[ht]
 \centering
 \label{table1}
 \begin{tabular}{|l|l|}
 \hline
 Dataset & Beschreibung \\ \hline
 \texttt{xo:dataset-xoFollowers}       & Anzahl der Follower für einen Agenten            	\\ \hline
-\texttt{xo:dataset-xoOUT}        & Ausgehende Nachrichten seit Start der Simulation         \\ \hline
+\texttt{xo:dataset-xoOUT}        & Ausgehende Nachrichten         \\ \hline
 \texttt{xo:dataset-xoIN}        & Eingegangene Nachrichten             						\\ \hline
 \texttt{xo:dataset-xoTriples}        & Anzahl gespeicherter triple auf einem Knoten        	\\ \hline
 \texttt{xo:dataset-xoAccess}        & Zugriffszeit auf eigene Zeitleiste             		\\ \hline
@@ -117,14 +117,14 @@ Jede Messung, also jede Observation, benötigt einen eindeutigen Bezeichner und 
 Der Statistik Controller ist in PHP 5 implementiert und folgt dem von Zend verwendeten Architekturmodell MVC. Er stellt einen zusätzlichen Controller dar, der über den Bootstrapping-Prozess von xodx zur Verfügung gestellt wird und dessen Messergebnis ohne xodx-Layout direkt über die URL bzw. mit einem http-request\footnote{\url{https:github.com/DSSN-Practical/DSSN\_Statistics/blob/master/doc/example-request.php}} abfragbar ist.\\
 Der Statistik Controller ist nach dem Klassenkonzept von PHP in öffentliche (public) und klasseninterne (private) Funktionen strukturiert und arbeitet mit dem Model, an welches Sparql Queries gestellt werden, um die benötigten statistische Kennwerte zu ermitteln. Eine Zusammenfassung der ,,public'' Funktionen ist in Tabelle 3 gelistet. \newpage
 Diese Funktionen sind als ,,Actions'' formuliert, werden also vom Zend Bootstrapper gefunden und mit entsprechenden Einstellungen über die Schnittstelle verfügbar\footnote{verfügbare Actions: Die readStoreAction diente ausschließlich der Verhaltensanalyse der Software in Bezug auf die abgespeicherten Daten. Sie sollte in einer laufenden Produktivversion der Software nicht mehr aktiv sein, da über sie via http-request der gesamte innere Speicher des Knotens auslesbar ist.} gemacht.\\
-\begin{table}[h!]
+\begin{table}[ht]
 \centering
 \label{table3}
 \begin{tabular}{|l|l|}
 \hline
 \texttt{public function} & Beschreibung \\ \hline
 \texttt{getStatsAction}       & Ermitteln der Kennwerte und Formatierung in turtle 	\\ \hline
-\texttt{readStoreAction}      & Auslesen des Triplestores und Ausgabe zum Debugging	\\ \hline
+\texttt{readStoreAction}      & Auslesen des Triplestores und Ausgabe	\\ \hline
 \end{tabular}
 \caption{,,public'' Funktionen des Statistik Controllers}
 \end{table}\\
@@ -135,12 +135,12 @@ Die ,,private'' Funktionen dienen zur Kapselung der einzelnen Anfragen an das Mo
 In diesem Kapitel sollen die bisherige Versuchsplanung der Simulation sowie die bisher erstellten Möglichkeiten zur Auswertung des DataCube zusammengefasst werden.\\
 Wie in Kapitel 3 teilweise beschrieben, ist geplant, auf einem leistungsfähigen Server zahlreiche Instanzen von Docker mit http-Schnittstellen untereinander zu initialisieren und so ein virtuelles Netzwerk aus Docker Containern aufzubauen. In diesen Containern läuft jeweils eine Instanz von xodx inklusive Virtuoso als xodx Knoten. Auf diesem Knoten ist jeweils nur ein Nutzer registriert, für den stellvertretend der virtuelle Agent in Form eines Replay-Programmes agiert.\\
 Die auszuführenden Aktionen sind an Realdaten, genauer an einem Twitter Export im xml Format, orientiert. Diese sind mit normierten Zeitstempeln und Identifikatoren für Agenten versehenen, werden jeder Instanz zur Verfügung gestellt und von der Replay Struktur des Agenten in Form von http-requests ausgeführt. Es gibt eine einheitliche Systemzeit auf dem Server, welche das Fortschreiten der Simulation sichert.\\
-Zu regelmäßigen Zeitpunkten wird diese Simulationszeit angehalten und es wird eine Statistik erstellt. Dies ist notwendig, um während der Messung selbige nicht durch Aktionen der Agenten zu verfälschen. Zur Durchführung der Messung ist ein spezieller Agent nötig, der eine Liste der Verbindungen zu jedem aktiven Agenten besitzt und von diesen rekursiv die Antworten des Statistik Controllers (Observations) sammelt und speichert.\\
+Zu regelmäßigen Zeitpunkten wird diese Simulationszeit angehalten und es wird eine Statistik erstellt. Dies ist notwendig, um während der Messung selbige nicht durch Aktionen der Agenten zu verfälschen. Zur Durchführung der Messung ist ein spezieller Agent nötig, der eine Liste der Verbindungen zu jedem aktiven Agenten besitzt und von diesen rekursiv die Antworten des Statistik Controllers (Observations) sammelAuslastungst und speichert.\\
 Dieser besondere Agent besitzt auch den Datensatz des DataCube, dem in der Auswertungsphase die Observations hinzugefügt werden. Die Auswertung soll in vier Schritten geschehen.
 \begin{enumerate}
 	\item{Transformation\\
-	Sowohl der DataCube als auch die Observations sind in zur Erhöhung der Lesbarkeit in turtle serialisiert. Für Schritt 2 ist es jedoch notwendig, dass die Dateien in RDF/XML vorliegen. Diese Umwandlung ist relativ einfach mit einem Kommandozeilen Tool namens ,,Raptor''\footnote{Raptor: \url{http://librdf.org/raptor/}} durchführbar. Ein Beispielbefehl dafür ist in Abbildung 2 zu sehen.\\
-	\begin{figure}[h]
+	Sowohl der DataCube als auch die Observations sind in zur Erhöhung der Lesbarkeit in turtle serialisiert. Für Schritt 2 ist es jedoch notwendig, dass die Dateien in RDF/XML vorliegen. Diese Umwandlung ist relativ einfach mit einem Kommandozeilen Tool namens ,,Raptor''\footnote{Raptor: \url{http://librdf.org/raptor/}} durchführbar. Ein Beispielbefehl dafür ist in Abbildung 2 zu sehen.
+	\begin{figure}[ht]
 	\centering
 	\texttt{\$ rapper -i turtle -o rdfxml observations/exampleObservations.ttl  > observations/exampleObservations.rdf}
 	\caption{Beispielbefehl Raptor}
@@ -149,7 +149,7 @@ Dieser besondere Agent besitzt auch den Datensatz des DataCube, dem in der Auswe
 	Diese Transformation hat zudem den Vorteil, dass eventuelle Fehler im RDF Graphen wie zum Beispiel falsch zusammengefügte Zeilen oder fehlende Präfixe frühzeitig erkannt und bereits in diesem Schritt behoben werden können.\\
 	\item{Überprüfung auf Validität bzw. Evaluation\\
 	Der nächste Schritt ist die Validitätsprüfung des DataCube. Dafür liegt ein ausführbares Java Archiv\footnote{\url{https://github.com/DSSN-Practical/DSSN_Statistics/blob/master/SparqlTester/bin/CubeValidator.jar}} im Repository, welches unter Verwendung des Apache Jena Frameworks das DataCube File sowie die Observations in den Arbeitsspeicher liest und darauf die Sparql queries ausführen kann, welche vom W3C zur Validierung eines DataCube zur Verfügung gestellt wurden. Diese liegen im Verzeichnis \texttt{/evaluation}. Das Archiv ist für die Verwendung auf der Kommandozeile auslegt und nimmt dementsprechend Parameter entgegen. Leider ist es mit Apache Jena nur möglich, RDF/XML serialisierte Dateien einzulesen (siehe Schritt 1). Ein Beispielbefehl ist in Bild 2 zu sehen.\\
-	\begin{figure}[h]
+	\begin{figure}[ht]
 	\centering
 	\texttt{\$ java -jar SparqlTester/bin/CubeValidator.jar datacubes/dssn\_cubeXML.rdf observations/exampleObservations.rdf evaluation/}
 	\caption{Beispielbefehl DataCube Validierung/Evaluation}
@@ -172,12 +172,13 @@ Dieser besondere Agent besitzt auch den Datensatz des DataCube, dem in der Auswe
 
 \section{Zusammenfassung}
 
-Das Ziel des Praktikums war es, eine agentenbasierte Simulation als Auslastungs- und funktionaler Test der xodx Software zu konzipieren, die dafür fehlenden Komponenten zu implementieren und die Simulation durchzuführen.\\
+Das Ziel des Praktikums war es, eine agentenbasierte Simulation als Belastungs- und funktionaler Test der xodx Software zu konzipieren, die dafür fehlenden Komponenten zu implementieren und die Simulation durchzuführen.\\
 Dafür gab es eine umfangreiche Vorarbeit aus dem letzten Wintersemester, welche Docker Container zum Aufbau der Versuchsinfrastruktur, einen Twitterkorpus mit Live-Daten für die Simulation sowie ein Konzept und einen DataCube für die Auswertung bzw. statistische Überwachung des Versuchsablaufes beinhaltete.\\
 Folglich bestanden die Aufgaben dieses Jahr darin, zum einen den Replay Agenten als Bindeglied zwischen der Docker/ xodx Instanz und dem Korpus und zum anderen einen Statistik Controller zum Messen und Sammeln der statistischen Kenngrößen zur Auswertung und Überwachung der Simulation zu implementieren.\\
 Diese Aufgaben übernahmen ein Kommilitone und ich, wobei er leider ab der zweiten Hälfte des Semesters das Praktikum aus Zeitgründen abbrechen musste. Aus diesem Grund war es uns nicht möglich, die Aufgaben bis zur Durchführung der eigentlichen Simulation zu lösen.\\
 Allerdings war die Umsetzung und der Test des Statistik Controllers auf einer lokalen Instanz von xodx mit einfachen Testdatensätzen erfolgreich und auch das Auswertungskonzept mit dem In-Memory Store von Apache Jena funktioniert und ist erweiterbar konzipiert.\\
-Auch war es gut möglich, den DataCube vom letzten Jahr an die Ergebnisse der Analyse der xodx Software anzupassen sowie auf die neueste Version zu updaten und, ebenfalls via Apache Jena, einen einfachen Mechanismus zur Verifikation der Daten durch Evaluation des DataCube anhand der vom W3C vorgegebenen Constraints zu implementieren. Zu diesen konzeptionellen Änderungen gehörten die Umsetzung der ,,Folgen''-Beziehung als einseitig gerichtetes Prädikat sowie die Umsetzung der xodx Funktionalität in der Auswertung der Simulation, dass beim Hinzufügen eines Freundes dessen gesamte Timeline ,,nachgezogen'' wird.\\
+Auch war es gut möglich, den DataCube vom letzten Jahr an die Ergebnisse der Analyse der xodx Software anzupassen sowie auf die neueste Version zu updaten und, ebenfalls via Apache Jena, einen einfachen Mechanismus zur Verifikation der Daten durch Evaluation des DataCube anhand der vom W3C vorgegebenen Constraints zu implementieren. \\
+Zu diesen konzeptionellen Änderungen gehörten die Umsetzung der ,,Folgen''-Beziehung als einseitig gerichtetes Prädikat sowie die Umsetzung der xodx Funktionalität in der Auswertung der Simulation, dass beim Hinzufügen eines Freundes dessen gesamte Timeline ,,nachgezogen'' wird.\\
 Mit dieser Struktur sollte es nun relativ einfach realisierbar sein, in einer weiteren Iteration der Testentwicklung für xodx eine agentenbasierte Simulation umzusetzen und den Praxistest der Software durchzuführen. Dafür fehlt noch der bereits angesprochene Replay Agent sowie ein spezieller Statistik Agent, der in den Pausenzeiten des Systems http-requests an alle registrierten Agenten stellt und die Antworten in z.B. einem File sammelt.\\
 Es wäre auch denkbar, dass in den Pausenzeiten die aktivierten Agenten diese requests an sich selbst stellen und die Ergebnisse, welche mit einem Zeitstempel versehen sind, im Nachhinein eingesammelt und zusammengefügt werden.\\ 
 Zusätzlich dazu müsste vom Lehrstuhl ein Server zur Verfügung gestellt werden, der die Last vieler parallel arbeitender Virtuoso Instanzen stemmen kann.
