@@ -19,8 +19,6 @@
 \tableofcontents
 \newpage
 
-%TODO ARBEIT statt Seminararbeit o. Praktikum
-
 \section{Einleitung und Aufgabenstellung}
 
 Das diesjährige DSSN-Praktikum (xodx) war in das Seminar ,,Anwendung Se-mantischer Technologien'' am Lehrstuhl für betriebliche Informationssysteme eingebettet und umfasste verschiedene praktische Aufgabenkomplexe, die von einem unabhängigen Studententeam bearbeitet wurden.\\
@@ -36,20 +34,29 @@ In diesem Kapitel sollen die Technologien vorgestellt werden, welche im praktisc
 
 \subsection{Semantic Web}
 
+%Erweiterung des Web
+%Verwendung hoch strukturierter Daten im Gegensatz zu unstrukturierten oder Semi-Strukturierten Daten
+%Verweis w3c Quelle
+%Technologiestack, davon sind triplestores besonders interessant
+
 - Semantic Web Vision und Internet 2.0
 
 
 \subsection{Triplestores}
 
+%speicherung, editieren suchen von Datensätzen im Graphen, optimiert auf triple/quadrupel struktur
 - Apache Jena
 - Virtuoso
 
 \subsection{Datacube-Vokabular}
-
+\cite{datacube}
+\cite{iso}
+%Statistik im Netz
+%baut auf blablubb auf, folgende Grafik zu sehen
 - kurz wie Vortrag am Bild
 
 \subsection{DSSN / Xodx}
-
+\cite{xodx_paper}
 - soziale Netzwerke als Schlüsselkomponente
 - Schwächen und Alternativen
 - distributed, social, semantic Network
@@ -68,7 +75,7 @@ Wie bereits in Kapitel 1 beschrieben, sollte die Arbeit auf der des Studententea
 	\item{Generierung von Testdaten\\
 	Um eine möglichst realitätsgetreue Simulation zu erreichen, sollte ein Korpus aus Realdaten extrahiert und über Transformationen in eine mit Zeitstempel versehene Liste von Aktionen im sozialen Netzwerk generiert werden. Dazu wurde in Python eine App entwickelt, die über die Twitter-Api verschiedene, untereinander vernetzte Timelines extrahiert und nach XML parst.}
 	\item{Planung einer Statistikkomponente\\
-	Es sollte eine mögliche Umsetzung einer Statistikkomponente  recherchiert werden, um mit dieser die Software auf vorher festgelegte Fehlerklassen zu überprüfen. Als Fehlerklassen wurden Dateneffizienz, verlorene Nachrichten und Zugriffsgeschwindigkeit auf die eigene Zeitleiste festgestellt und es sollte mithilfe der Simulationssoftware ermöglicht werden, auf Unregelmäßigkeiten in diesen Gebieten zu prüfen. Die Speicherung der Daten dieser Erhebung soll ebenfalls innerhalb des Paradigma des Semantic Web erfolgen und es wurde das DataCube-Vokabular evaluiert sowie ein DataCube angelegt, der zur Speicherung der Daten verwendet werden soll. Es sollte das vom Lehrstuhl entwickelte Tool CubeViz\footnote{CubeViz} verwendet werden, um die Daten graphisch auszuwerten.}
+	Es sollte eine mögliche Umsetzung einer Statistikkomponente  recherchiert werden, um mit dieser die Software auf vorher festgelegte Fehlerklassen zu überprüfen. Als Fehlerklassen wurden Dateneffizienz, verlorene Nachrichten und Zugriffsgeschwindigkeit auf die eigene Zeitleiste festgestellt und es sollte mithilfe der Simulationssoftware ermöglicht werden, auf Unregelmäßigkeiten in diesen Gebieten zu prüfen. Die Speicherung der Daten dieser Erhebung soll ebenfalls innerhalb des Paradigma des Semantic Web erfolgen und es wurde das DataCube-Vokabular evaluiert sowie ein DataCube angelegt, der zur Speicherung der Daten verwendet werden soll. Es sollte das vom Lehrstuhl entwickelte Tool CubeViz\cite{cubeviz}\footnote{CubeViz} verwendet werden, um die Daten graphisch auszuwerten.}
 \end{enumerate}
 Mit dieser Arbeit war es möglich, dem eigentlichen Simulationsversuch näher zu kommen, auch wenn dieser aufgrund der geringen Teamgröße nicht umgesetzt werden konnte. Hier wurde im Wintersemester 2015 erneut angesetzt mit dem Ziel, alle bereits vorhandenen Komponenten zu verbinden. Dazu wurde ein Replay-Agent benötigt, welcher es ermöglicht, auf der laufenden Docker-Infrastruktur den vorhandenen Twitterkorpus ,,abzuspielen''.\\
  Zusätzlich dazu musste ein Statistik Controller als Verbindung zwischen der Live-Instanz eines Agenten und den im DataCube hinterlegten Beobachtungen entwickelt werden. Mit letzterer Aufgabe habe ich mich beschäftigt. Dabei ist mir aufgefallen, dass der im vergangenen Jahr erstellte DataCube bewusst von der aktuellsten Empfehlung des W3C abweicht, um besser mit CubeViz zu harmonieren. Mit der Neuentwicklung von CubeViz und anderen Möglichkeiten der Auswertung (siehe Kapitel 6) ist diese Anpassung nicht mehr notwendig und der DataCube konnte auf die aktuelle Version des Vokabulars geupdatet werden.
@@ -148,7 +155,7 @@ Dieser besondere Agent besitzt auch den Datensatz des DataCube, dem in der Auswe
 	}
 	\item{Überprüfung auf verlorene Nachrichten\\
 	Dies ist die erste zur Prüfende Klasse von Fehlern, welche während der Simulation auftreten können. Da in xodx die Versendung von Nachrichten auf Basis eines Abonnement eines anderen Nutzers geschieht und dieses Abonnement dezentral gespeichert wird, ist es für einen Nutzer von seinem eigenen Knoten aus nicht nachvollziehbar, an wie viele Rezipienten die Nachricht in seiner Zeitleiste versendet wurde. Diese Information lässt sich nur aus der Gesamtheit der Daten in der Statistik schließen. Hierfür wurde ebenfalls ein ausführbares Java Archiv geschrieben. Mit diesem ist es möglich, beliebige Sparql queries auf der Wissensbasis bestehend aus DataCube und Observations auszuführen. Einige für die Auswertung prädestinierte queries befinden sich im Unterordner \texttt{/queries}. In Abbildung 3 ist der Befehl für die Auswertung auf verlorene Nachrichten zu sehen.
-	\begin{figure}[h]
+	\begin{figure}[ht]
 	\centering
 	\texttt{\$ java -jar SparqlTester/bin/SelectTester.jar datacubes/dssn\_cubeXML.rdf observations/exampleObservations.rdf queries/checkLostMessages.sparql}
 	\caption{Beispielbefehl Test auf verlorene Nachrichten}
@@ -169,7 +176,9 @@ Diese Aufgaben übernahmen ein Kommilitone und ich, wobei er leider ab der zweit
 Allerdings war die Umsetzung und der Test des Statistik Controllers auf einer lokalen Instanz von xodx mit einfachen Testdatensätzen erfolgreich und auch das Auswertungskonzept mit dem In-Memory Store von Apache Jena funktioniert und ist erweiterbar konzipiert.\\
 Auch war es gut möglich, den DataCube vom letzten Jahr an die Ergebnisse der Analyse der xodx Software anzupassen sowie auf die neueste Version zu updaten und, ebenfalls via Apache Jena, einen einfachen Mechanismus zur Verifikation der Daten durch Evaluation des DataCube anhand der vom W3C vorgegebenen Constraints zu implementieren. Zu diesen konzeptionellen Änderungen gehörten die Umsetzung der ,,Folgen''-Beziehung als einseitig gerichtetes Prädikat sowie die Umsetzung der xodx Funktionalität in der Auswertung der Simulation, dass beim Hinzufügen eines Freundes dessen gesamte Timeline ,,nachgezogen'' wird.\\
 Mit dieser Struktur sollte es nun relativ einfach realisierbar sein, in einer weiteren Iteration der Testentwicklung für xodx eine agentenbasierte Simulation umzusetzen und den Praxistest der Software durchzuführen. Dafür fehlt noch der bereits angesprochene Replay Agent sowie ein spezieller Statistik Agent, der in den Pausenzeiten des Systems http-requests an alle registrierten Agenten stellt und die Antworten in z.B. einem File sammelt.\\
-Es wäre auch denkbar, dass in den Pausenzeiten die aktivierten Agenten diese requests an sich selbst stellen und die Ergebnisse, welche mit einem Zeitstempel versehen sind, im Nachhinein eingesammelt und zusammengefügt werden. Zusätzlich dazu müsste vom Lehrstuhl ein Server zur Verfügung gestellt werden, der die Last vieler parallel arbeitender Virtuoso Instanzen stemmen kann.
+Es wäre auch denkbar, dass in den Pausenzeiten die aktivierten Agenten diese requests an sich selbst stellen und die Ergebnisse, welche mit einem Zeitstempel versehen sind, im Nachhinein eingesammelt und zusammengefügt werden.\\ 
+Zusätzlich dazu müsste vom Lehrstuhl ein Server zur Verfügung gestellt werden, der die Last vieler parallel arbeitender Virtuoso Instanzen stemmen kann.
+
 
 \bibliographystyle{plain}
 \bibliography{references.bib}
