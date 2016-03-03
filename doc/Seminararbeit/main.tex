@@ -54,7 +54,10 @@ In diesem Kapitel sollen die Technologien vorgestellt werden, welche im praktisc
 - Schwächen und Alternativen
 - distributed, social, semantic Network
 - Verwendung von Zend, Saft und Erfurt Zusammenhang
+
 %Was ist das xodx model?
+\subsubsection{Zend}
+%Action-Methoden in Controllerklassen
 
 \section{Vorarbeit}
 
@@ -102,18 +105,27 @@ Dimension & Beschreibung \\ \hline
 Jede Messung, also jede Observation, benötigt einen eindeutigen Bezeichner und ist genau einem Dataset zugeordnet. Sie umfasst stets zusätzlich zu den zwei Dimensionen aus Tabelle 2 den Messwert in der Dimension der Messgröße des Datasets. Es gibt im Repository dazu ein kurzes Beispiel\footnote{\url{https://github.com/DSSN-Practical/DSSN_Statistics/blob/master/observations/exampleObservations.ttl}}. In diesem sind Observations zu zwei Agenten enthalten, die sich gegenseitig folgen und zu zwei Zeitpunkten Nachrichten versenden, welche fehlerfrei den jeweils anderen Agenten erreichen.
 
 \section{Architektur des Statistikkontrollers}
-Der Statistikkontroller ist in php5 implementiert und folgt dem von Zend verwendeten Architekturmodell MVC. Er stellt einen zusätzlichen Controller dar, der über den bootstrapping-Prozess von xodx zur Verfügung gestellt wird und dessen Messergebnis ohne xodx-Layout direkt über die URL bzw. mit einem http-request\footnote{\url{https:github.com/DSSN-Practical/DSSN\_Statistics/blob/master/doc/example-request.php}} abfragbar ist.\\
-Er untergliedert sich in 
+Der Statistikkontroller ist in PHP 5 implementiert und folgt dem von Zend verwendeten Architekturmodell MVC. Er stellt einen zusätzlichen Controller dar, der über den Bootstrapping-Prozess von xodx zur Verfügung gestellt wird und dessen Messergebnis ohne xodx-Layout direkt über die URL bzw. mit einem http-request\footnote{\url{https:github.com/DSSN-Practical/DSSN\_Statistics/blob/master/doc/example-request.php}} abfragbar ist.\\
+Der Statistikkontroller ist nach dem Klassenkonzept von PHP in öffentliche (public) und klasseninterne (private) Funktionen strukturiert und arbeitet mit dem Model, an welches Sparql Queries gestellt werden, um die benötigten statistische Kennwerte zu ermitteln. Eine Zusammenfassung der ,,public'' Funktionen ist in Tabelle 3 gelistet. Diese Funktionen sind als ,,Actions'' formuliert, werden also vom Zend Bootstrapper gefunden und mit entsprechenden Einstellungen über die Schnittstelle verfügbar\footnote{verfügbare Actions: Die readStoreAction diente ausschließlich der Verhaltensanalyse der Software in Bezug auf die abgespeicherten Daten. Sie sollte in einer laufenden Produktivversion der Software nicht mehr aktiv sein, da über sie via http-request der gesamte innere Speicher des Knotens auslesbar ist.} gemacht.\\
+\begin{table}[h!]
+\centering
+\label{table3}
+\begin{tabular}{|l|l|}
+\hline
+\texttt{public function} & Beschreibung \\ \hline
+\texttt{getStatsAction}       & Ermitteln der Kennwerte und Formatierung in turtle 	\\ \hline
+\texttt{readStoreAction}      & Auslesen des Triplestores und Ausgabe zum Debugging	\\ \hline
+\end{tabular}
+\caption{,,public'' Funktionen des Statistikkontrollers}
+\end{table}\\
+Die ,,private'' Funktionen dienen zur Kapselung der einzelnen Anfragen an das Model beim Erstellen der Observations in den einzelnen Datasets. Durch diese Auslagerung von Funktionalität wird eine höhere Robustheit und des Codes erreicht und sie dient außerdem dazu, die Fehlersuche stark zu vereinfachen.
 
+\section{Planung der Simulation, Auswertung}
 
-- public
-- private
-- Verwendung xodx Model
-- Aufruf bei jedem Messzeitpunkt bei jedem Agenten geplant
-
-\section{Planung der Auswertung}
-
+In diesem Kapitel soll die Versuchsplanung des Simulations
 - am Datenflussdiagramm?
+%Verweis Kapitel 3
+- Aufruf bei jedem Messzeitpunkt bei jedem Agenten geplant
 - zur Auswertung gehört 
 1. Überprüfung des Datacube auf Validität
 	%Prüfung auf Kollisionen in den Bezeichnern. Zufällig generiert, daher nicht prinzipiell auszuschließen
