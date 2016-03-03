@@ -1,10 +1,10 @@
 PREFIX qb:<http://purl.org/linked-data/cube#>
 PREFIX xo:<http://xodx.dssn.org/>
-SELECT ?timeStamp ?agent ?follower
+SELECT ?timeStamp ?agent ?followedUser
 WHERE {
     ?observation a qb:Observation;
         xo:refAgent ?agent;
         xo:refTime ?timeStamp;
-        xo:follower ?follower.
+        xo:follows ?followedUser.
 }
 ORDER BY ?timeStamp

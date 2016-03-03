@@ -9,25 +9,25 @@ xo:o01 a qb:Observation;
     qb:dataSet  xo:dataset-xoFollower ;
     xo:refAgent xo:agent01 ;
     xo:refTime  1 ;                  
-    xo:follower 1 ;
+    xo:follows xo:agent02 ;
     .
 xo:o02 a qb:Observation;
     qb:dataSet  xo:dataset-xoFollower ;
     xo:refAgent xo:agent01 ;
     xo:refTime  2 ;                  
-    xo:follower 1 ;
+    xo:follows xo:agent02 ;
     .
 xo:o03 a qb:Observation;
     qb:dataSet  xo:dataset-xoFollower ;
     xo:refAgent xo:agent02 ;
     xo:refTime  1 ;                  
-    xo:follower 1 ;
+    xo:follows xo:agent01 ;
     .
 xo:o04 a qb:Observation;
     qb:dataSet  xo:dataset-xoFollower ;
     xo:refAgent xo:agent02 ;
     xo:refTime  2 ;                  
-    xo:follower 1 ;
+    xo:follows xo:agent01 ;
     .
 #outgoing messages: two agents messaging 5, 10, 3 and 10 messages on two timestamps
 xo:o11 a qb:Observation;
